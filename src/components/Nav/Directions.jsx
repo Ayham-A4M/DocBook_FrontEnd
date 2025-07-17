@@ -7,6 +7,7 @@ import {
     FiCalendar,
     FiUser,
 } from 'react-icons/fi';
+import { CiBookmark } from "react-icons/ci";
 
 import { GoHome } from "react-icons/go";
 import { TbHeartbeat } from "react-icons/tb";
@@ -28,6 +29,7 @@ const getDirection = () => {
         { to: '/reports', name: 'Reports', icon: <FiUser /> },
         { to: '/comments', name: 'Comments', icon: <BiCommentDots /> },
         { to: '/doctorProfile', name: 'Profile', icon: <CiCircleInfo /> },
+        { to: '/upcomingAppointments', name: 'Bookings', icon: <CiBookmark /> },
 
     ]
     const admindirection = [

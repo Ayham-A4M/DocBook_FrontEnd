@@ -33,14 +33,14 @@ const AllUsers = () => {
                     <SearchInput searchValue={searchByName} setSearchValue={setSearchByName} />
                 </div>
                 <div className="overflow-x-auto ">
-                    <table className="w-full text-left">
+                    <table className="w-full text-left min-w-[700px]">
                         <thead className="px-2">
                             <tr className="text-gray-500 dark:text-gray-200 text-sm uppercase tracking-wide border-b border-gray-200">
                                 <th className="py-3 px-4 text-center">Name</th>
                                 <th className="py-3 px-4 text-center">Email</th>
                                 <th className="py-3 px-4 text-center">Age</th>
                                 <th className="py-3 px-4 text-center">Phone</th>
-                                <th className="py-3 px-4">Delete</th>
+                                <th className="py-3 px-4 text-center">Delete</th>
                             </tr>
                         </thead>
                         <tbody>

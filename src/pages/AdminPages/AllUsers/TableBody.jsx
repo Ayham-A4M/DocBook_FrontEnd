@@ -12,7 +12,7 @@ const TableBody = ({ setShowDeletePopUp, setUserId, data }) => {
               <td className="py-4 text-center">{e.fullName}</td>
               <td className="py-4 text-center">{e.email}</td>
               <td className="py-4 text-center">{e.age || 0}</td>
-              <td className="py-4 text-center">{e.phoneNumber || '09998889'}</td>
+              <td className="py-4 text-center">{e.phoneNumber}</td>
               <td className="py-4 text-center">
                 <Button variant="outline" size="icon" onClick={() => { setShowDeletePopUp(true); setUserId(e._id) }}>
                   <MdDelete className="text-red-500" />

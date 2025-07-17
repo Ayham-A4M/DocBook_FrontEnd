@@ -1,9 +1,8 @@
 
-import {  FiDownload, FiSearch, } from 'react-icons/fi';
+import {  FiSearch, } from 'react-icons/fi';
 import {Button} from '@/components/ui/button'
 const Filters = ({ setName, name,setFilterStatus }) => {
     const handleChangeStatus=(event)=>{
-        console.log(event.target.value)
         event.preventDefault();
         setFilterStatus(event.target.value);
     }

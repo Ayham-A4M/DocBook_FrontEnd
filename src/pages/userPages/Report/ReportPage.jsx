@@ -1,8 +1,7 @@
 import { useSearchParams } from "react-router-dom"
 import Header from "../../MyAppointments/Header";
-import { TbReport } from "react-icons/tb";
 import ReportInfoSkeleton from "./ReportInfoSkeleton";
-
+import MainTitle from "../../../components/MainTitle";
 import useAxios from '../../../hooks/useAxios';
 import ReportInformation from "./ReportInformation";
 const ReportPage = () => {
@@ -12,7 +11,7 @@ const ReportPage = () => {
     return (
         <div className=" pb-5">
             <div className="space-y-3">
-                <Header title={'Patient Medical Report'} icon={<TbReport className="text-2xl" />} subTitle={'Confidential Medical Documentation'} />
+                <MainTitle  mainTitle={'Healthcare diagonostic report'} subTitle={'Condition , Recommmendations , Recap'}/>
                 <div className="grid grid-cols-2 max-[991px]:grid-cols-1  gap-6">
                     <div className="flex max-[991px]:justify-center">
                         <div className="w-full relative max-w-[450px] min-h-[700px] border-2 border-slate-500 dark:border-slate-400 rounded-[6px]">
@@ -35,7 +34,7 @@ const ReportPage = () => {
                             <h1 className="text-2xl font-medium text-[var(--main-blue)]">Doctor Notes</h1>
                             <div>
                                 {
-                                     Array.isArray(data?.notesForPatient)&&data?.notesForPatient?.map((e) => (
+                                    Array.isArray(data?.notesForPatient) && data?.notesForPatient?.map((e) => (
                                         <div className="flex items-center gap-1">
                                             <span className="size-1 dark:bg-slate-300 bg-[var(--main-blue)] rounded-full"></span>
                                             <span key={e.id} className="dark:text-slate-300 text-[var(--main-blue)]">{e.note}</span>
@@ -55,7 +54,7 @@ const ReportPage = () => {
                             <h1 className="text-2xl font-medium text-[var(--main-blue)]">Read about medicines</h1>
                             <div className="flex flex-col gap-2">
                                 {
-                                    Array.isArray(data?.prescriptions)&&data?.prescriptions?.map((e) => (
+                                    Array.isArray(data?.prescriptions) && data?.prescriptions?.map((e) => (
                                         <a key={e.id} href={`https://www.drugs.com/search.php?searchterm=${e.medicine}`} target="_blank" className="underline" >{e.medicine}</a>
                                     ))
                                 }

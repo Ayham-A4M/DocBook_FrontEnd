@@ -13,29 +13,35 @@ import DeletePopUp from "../../../components/DeletePopUp";
 import handleDeleteDoctor from "./handler/handleDeleteDoctor";
 const AllDoctors = () => {
     const [showDeletePopUp, setShowDeletePopUp] = useState(false);
-    const [showEditPopUp, setShowEditPopUp] = useState(false);
     const [page, setPage] = useState(1);
     const [searchName, setSearchName] = useState('');
     const [spec, setSpec] = useState('');
     const [searchDebounce] = useDebounce(searchName, 2000);
-    const [finalSearch,setFinalSearch]=useState('');
+    const [finalSearch, setFinalSearch] = useState('');
     const [doctorId, setDoctorId] = useState(null);
     const { data, err, loading } = useAxios(`/api/admin/doctors/?page=${page}&fullName=${finalSearch}&specialization=${spec}`, true);
-    useEffect(()=>{
+    useEffect(() => {
         setFinalSearch(searchDebounce);
         setPage(1);
-    },[searchDebounce])
+    }, [searchDebounce])
     return (
         <div className="w-full md:p-8 p-1">
             <MainTitle mainTitle={'Medical Staff Dashboard'} subTitle={'Access Doctor Profiles Availability and Key Metrics'} />
             <div className="bg-card rounded-lg py-8 shadow-sm mb-12">
-                <div className="pb-6 flex justify-between px-8 border-b-[1px] border-gray-100  items-center flex-col gap-2 md:flex-row">
-                    <SearchInput searchValue={searchName} setSearchValue={setSearchName} />
-                    <SelectSpec setValue={setSpec} />
+                <div className="pb-6 flex md:justify-between md:px-8 px-2 border-b-[1px] border-gray-100  md:items-center flex-col gap-2 md:flex-row">
+                    <div className="flex w-fit gap-1 flex-col">
+                        <span className="font-light italic">Search by name :</span>
+                        <SearchInput searchValue={searchName} setSearchValue={setSearchName} />
+                    </div>
+                    <div className="flex w-fit gap-1 flex-col">
+                        <span className="font-light italic">Filter by specialization :</span>
+                        <SelectSpec setValue={setSpec} />
+                    </div>
+
 
                 </div>
                 <div className="overflow-x-auto ">
-                    <table className="w-full text-left">
+                    <table className="w-full text-left min-w-[800px] md:min-w-[700px]">
                         <thead className="px-2">
                             <tr className="text-gray-500 dark:text-gray-200 text-sm uppercase tracking-wide border-b border-gray-200">
                                 <th className="py-3 px-4">Image</th>
@@ -111,10 +117,10 @@ const AllDoctors = () => {
             {
                 showDeletePopUp &&
 
-                <DeletePopUp setShowDeletePopUp={setShowDeletePopUp} deleteFunction={handleDeleteDoctor} deleteId={doctorId}  />
+                <DeletePopUp setShowDeletePopUp={setShowDeletePopUp} deleteFunction={handleDeleteDoctor} deleteId={doctorId} />
 
             }
-          
+
         </div>
 
 

@@ -28,6 +28,7 @@ const DoctorAppointments = React.lazy(() => import('./pages/doctorPages/Mangment
 const Reports = React.lazy(() => import('./pages/doctorPages/Rrports/Reports'))
 const Comments = React.lazy(() => import('./pages/doctorPages/Comments/Comments'))
 const DoctorProfile = React.lazy(() => import('./pages/doctorPages/Profile/DoctorProfile'))
+const UpComingAppointments = React.lazy(() => import('./pages/doctorPages/UpComingAppointments/UpComingAppointments'))
 // adminPages
 
 const NewDoctor = React.lazy(() => import('./pages/AdminPages/NewDoctor/NewDoctor'))
@@ -74,39 +75,38 @@ const App = () => {
 
 
               {/* doctor routes */}
-              <Route element={<PortectRoute role={'doctor'} />}>
+              {/* <Route element={<PortectRoute role={'doctor'} />}> */}
                 <Route element={<DoctorLayout />}>
                   <Route path="/doctorappointments" element={<DoctorAppointments />} />
                   <Route path="/reports" element={<Reports />} />
                   <Route path="/comments" element={<Comments />} />
                   <Route path="/doctorProfile" element={<DoctorProfile />} />
                   <Route path="/reportPage" element={<ReportPage />} />
+                  <Route path="/upcomingAppointments" element={<UpComingAppointments />} />
                 </Route>
-              </Route>
+              {/* </Route> */}
               {/* doctor routes */}
 
               {/* admin routes */}
 
-              {/* <Route element={<PortectRoute role={'admin'} />}> */}
-              <Route element={<DoctorLayout />}>
+              <Route element={<PortectRoute role={'admin'} />}>
+                <Route element={<DoctorLayout />}>
 
-                <Route path="/statistics" element={<AdminDashboard />} />
-                <Route path="/allDoctors" element={<AllDoctors />} />
-                <Route path="/newdoctor" element={<NewDoctor />} />
-                <Route path="/allUsers" element={<AllUsers />} />
-                <Route path="/holidays" element={<HolidayPage />} />
+                  <Route path="/statistics" element={<AdminDashboard />} />
+                  <Route path="/allDoctors" element={<AllDoctors />} />
+                  <Route path="/newdoctor" element={<NewDoctor />} />
+                  <Route path="/allUsers" element={<AllUsers />} />
+                  <Route path="/holidays" element={<HolidayPage />} />
+                </Route>
+
               </Route>
 
-              {/* </Route> */}
 
-              {/* tests route */}
-
-              
 
               {/* admin routes */}
 
               {/* public routes */}
-              <Route path="/loading" element={<LoadingPage/>}/>
+              <Route path="/loading" element={<LoadingPage />} />
               <Route path="/login_signup" element={<Login_SignUp />} />
               <Route path="/unauthorized" element={<UnAuthorized />} />
               <Route path="/successfulOperation" element={<SuccessfulAppointment />} />

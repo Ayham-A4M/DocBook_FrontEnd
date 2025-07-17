@@ -1,12 +1,13 @@
 
 import TakeAppointment from './TakeAppointment';
-import { FaUniversity, FaUserMd, FaVenusMars, FaBirthdayCake, FaClock } from 'react-icons/fa';
+import { FaUniversity, FaUserMd, FaVenusMars, FaBirthdayCake } from 'react-icons/fa';
 import { MdWork } from 'react-icons/md';
 import Section from './Section';
 import { useLocation } from 'react-router-dom';
 import useGetSpecificDoctor from '../../hooks/useGetSpecificDoctor';
 import LeftCard from './LeftCard';
 import RateDoctor from './RateDoctor';
+import { IoIosClock } from "react-icons/io";
 const DoctorPage = () => {
 
     const workingHours = "9:00 AM - 2:00 PM";
@@ -100,8 +101,9 @@ const DoctorPage = () => {
                                         </div>
                                         <div>
                                             <h3 className="text-lg font-medium mb-3 flex items-center">
-                                                <FaClock className="text-[var(--main-blue)] mr-2" />
+                                                <IoIosClock className="text-[var(--main-blue)] mr-2" />
                                                 Availability
+                                                
                                             </h3>
                                             <ul className="space-y-2">
                                                 <li className="flex items-start">

@@ -18,7 +18,7 @@ const Reports = () => {
     const { reports, setReports, limit, loading, name, setName, page, setPage, reportStats, setFilterStatus } = useGetReports();
 
     return (
-        <div className="flex-1 p-1 md:p-8 max-w-7xl mx-auto">
+        <div className="flex-1 p-1 md:p-8 w-full">
             {/* Header */}
             <MainTitle mainTitle={'Medical Reports Dashboard'} subTitle={'Monitor and manage patient reports with ease'}/>
             

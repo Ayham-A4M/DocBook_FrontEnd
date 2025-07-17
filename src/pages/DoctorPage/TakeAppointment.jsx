@@ -1,83 +1,59 @@
-
-import { nextFriday, nextMonday, nextSaturday, nextWednesday, nextSunday, nextThursday, nextTuesday, isSunday, isTuesday, isMonday, isWednesday, isThursday, isFriday, isSaturday } from "date-fns";
-import { FaUserInjured, FaClock, FaCreditCard } from "react-icons/fa6";
-import { CiCalendarDate } from "react-icons/ci";
+import { FaCreditCard } from "react-icons/fa6";
 import Title from "./Title";
-import { format } from "date-fns";
-import { useState } from "react";
+import { endOfMonth, format, isBefore, isEqual, isToday, isWithinInterval } from "date-fns";
+import { IoCalendarOutline } from "react-icons/io5";
+import { IoIosClock } from "react-icons/io";
+import { BsFillPatchQuestionFill } from "react-icons/bs";
+import { useState, useMemo } from "react";
 import Loader2 from "../../components/Loader2";
 import handleCreateNewAppointment from "./handler/handleCreateNewAppointment";
 import useGetTakedAppointments from "../../hooks/useGetTakedAppointments";
 import { useNavigate } from "react-router-dom";
-
+import DatePicker from 'react-datepicker';
+import 'react-datepicker/dist/react-datepicker.css';
 const TakeAppointment = ({ nextHolidays, workingDays, doctorId, fee }) => {
-    const navigate=useNavigate();
+    const navigate = useNavigate();
     const [date, setDate] = useState('');
     const [time, setTime] = useState('');
-    const [day, setDay] = useState('');
     const [paymentWay, setPaymentWay] = useState(null);
     const [reason, setReason] = useState('');
     const { takedAppointments, sendReq } = useGetTakedAppointments(date, doctorId);
-    const holidays = new Set();
     const times = ['9:00 AM', '9:30 AM', '10:00 AM', '10:30 AM', '11:00 AM', '11:30 AM', '12:00 PM', '12:30 PM', '1:00 PM', '1:30 AM'];
 
-    const getDateByDayName = (Day) => {
-        const now = new Date();
-        switch (Day) {
-            case 'sun': return format(isSunday(now) ? now : nextSunday(now), "yyyy-MM-dd");
-            case 'mon': return format(isMonday(now) ? now : nextMonday(now), "yyyy-MM-dd");
-            case 'tue': return format(isTuesday(now) ? now : nextTuesday(now), "yyyy-MM-dd");
-            case 'wed': return format(isWednesday(now) ? now : nextWednesday(now), "yyyy-MM-dd");
-            case 'thu': return format(isThursday(now) ? now : nextThursday(now), "yyyy-MM-dd");
-            case 'fri': return format(isFriday(now) ? now : nextFriday(now), "yyyy-MM-dd");
-            case 'sat': return format(isSaturday(now) ? now : nextSaturday(now), "yyyy-MM-dd");
-            default: return null;
+
+
+    const isNotHoliday = (date) => {
+        return nextHolidays?.every((e) => (
+            e.date != format(date, 'yyyy-MM-dd')
+        ))
+    };
+    const isValidDay = useMemo(() => {
+        return (date) => {
+            const isvalid = workingDays?.includes(format(date, 'EEE').toLowerCase()) && isNotHoliday(date) && (isWithinInterval(date, {
+                start: new Date(),
+                end: endOfMonth(new Date())
+            }) || isEqual(date, endOfMonth(new Date())) || isToday(date))
+            return isvalid;
         }
-    };
-
-    const getDayDate = (event, Day) => {
-        event.preventDefault();
-        setDate(getDateByDayName(Day));
-    };
-
-    const isHoliday = (dayName) => {
-        const nextDate = getDateByDayName(dayName);
-        if (!nextHolidays) return false;
-        const isholiday = nextHolidays.some((e) => e.date === nextDate);
-        if (isholiday) holidays.add(dayName);
-        return isholiday;
-    };
-
+    }
+        , [workingDays])
     return (
         <div className="w-full bg-card  p-3  rounded-2xl shadow-lg flex flex-col gap-6">
             {/* Days Section */}
-            <Title title="Select Day" icon={<CiCalendarDate className="text-2xl  " />} />
-            <div className="grid grid-cols-3 sm:grid-cols-4 gap-3">
-                {workingDays?.map((e, i) => (
-                    <button
-                        key={i}
-                        disabled={isHoliday(e)}
-                        onClick={(event) => { getDayDate(event, e); setDay(e);setTime('') }}
-                        className={`py-2 px-4 capitalize cursor-pointer rounded-lg font-medium text-sm transition-all duration-300 ${e === day
-                            ? 'bg-blue-500 text-white shadow-md'
-                            : holidays.has(e)
-                                ? 'bg-gray-300 text-gray-800 cursor-not-allowed'
-                                : 'bg-blue-50 text-blue-600 hover:bg-blue-100 hover:shadow-sm'
-                            }`}
-                    >
-                        {
-                            format(new Date(), 'EEE') == e.slice(0, 1).toUpperCase() + e.slice(1)
-                                ?
-                                'Today'
-                                :
-                                e
-                        }
-                    </button>
-                ))}
+            <Title title="Select Day" icon={<IoCalendarOutline className="text-2xl  " />} />
+            <div className="w-fit relative">
+                <IoCalendarOutline className="text-[var(--main-blue)] absolute top-[50%] left-[10px] translate-y-[-50%]" />
+                <DatePicker
+                    className='inputStyle w-full pl-0'
+                    selected={date}
+                    onChange={(date) => { setDate(format(date, 'yyyy-MM-dd')); console.log(isBefore(date, endOfMonth(new Date()))) }}
+                    filterDate={isValidDay}
+                    placeholderText="Select a holiday date"
+                />
             </div>
 
             {/* Time Section */}
-            <Title title="Select Time" icon={<FaClock className="text-2xl " />} />
+            <Title title="Select Time" icon={<IoIosClock className="text-2xl " />} />
             {sendReq ? (
                 <div className="flex justify-center py-10">
                     <Loader2 />
@@ -108,7 +84,7 @@ const TakeAppointment = ({ nextHolidays, workingDays, doctorId, fee }) => {
             )}
 
             {/* Reason Section */}
-            <Title title="Reason for Visit" icon={<FaUserInjured className="text-2xl" />} />
+            <Title title="Reason for Visit" icon={<BsFillPatchQuestionFill className="text-2xl" />} />
             <input
                 type="text"
                 value={reason}
@@ -145,12 +121,13 @@ const TakeAppointment = ({ nextHolidays, workingDays, doctorId, fee }) => {
 
             {/* Submit Button */}
             <button
-                onClick={async (e) => { e.preventDefault(); 
-                    const response=await handleCreateNewAppointment(doctorId, fee, date, time, reason, paymentWay);
-                    if(response){
-                        return  navigate(`/successfulOperation`, { replace: true,state:{OKMSG:response} });
+                onClick={async (e) => {
+                    e.preventDefault();
+                    const response = await handleCreateNewAppointment(doctorId, fee, date, time, reason, paymentWay);
+                    if (response) {
+                        return navigate(`/successfulOperation`, { replace: true, state: { OKMSG: response } });
                     }
-                 }}
+                }}
                 className="submitButton"
             >
                 Book Appointment
