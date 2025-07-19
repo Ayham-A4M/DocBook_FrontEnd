@@ -1,4 +1,3 @@
-import { MdFilter5 } from "react-icons/md";
 import {
     Select,
     SelectContent,
@@ -8,13 +7,15 @@ import {
     SelectGroup,
     SelectLabel
 } from "@/components/ui/select"
+import {  subYears, startOfYear } from "date-fns";
+import { memo } from "react"
 const SelectYear = ({ setYear }) => {
 
     const thisYear = new Date().getFullYear();
     return (
 
         <div className="flex justify-end py-6">
-            <Select onValueChange={(e) => { setYear(e) }} className="focus-visible:-blue-500">
+            <Select onValueChange={(e) => { console.log(e);setYear(e) }} className="focus-visible:-blue-500">
                 <SelectTrigger className="w-[180px]  ring-1 ring-gray-400 focus:ring-blue-600" >
                     <SelectValue placeholder="Year" />
                 </SelectTrigger>
@@ -23,7 +24,9 @@ const SelectYear = ({ setYear }) => {
                         <SelectLabel>Holidays Year</SelectLabel>
                         {
                             [...Array(5)].map((e, i) => (
-                                <SelectItem value={`${thisYear - i}`} key={i}>{thisYear - i}</SelectItem>
+                                // <SelectItem value={`${thisYear - i}`} key={i}>{thisYear - i}</SelectItem>
+                                
+                                <SelectItem value={`${startOfYear(subYears(new Date(),i))}`} key={i} className="text-popover-foreground">{thisYear - i}</SelectItem>
 
                             ))
                         }
@@ -36,21 +39,7 @@ const SelectYear = ({ setYear }) => {
     )
 }
 
-export default SelectYear
+export default memo(SelectYear);
 
 
 
-
-{/* <div className=" flex justify-end py-6">
-            <div className="w-fit flex items-center gap-4">
-                <MdFilter5 className="text-[18px] text-[var(--main-blue)]" />
-                <select className="py-1 cursor-pointer px-5 border-[var(--main-blue)] border-2 rounded-[4px]" onChange={(e) => { setYear(e.target.value) }}>
-                    {
-                        [...Array(5)].map((e, i) => (
-                            <option value={`${thisYear - i}`} key={i}>{thisYear - i}</option>
-                        ))
-                    }
-
-                </select>
-            </div>
-        </div> */}

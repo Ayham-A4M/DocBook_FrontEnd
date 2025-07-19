@@ -181,8 +181,10 @@ const EditButton = ({ doctorId, setDoctorId }) => {
                             <Controller
                                 name='phoneNumber'
                                 control={control}
+
                                 render={({ field }) => (
                                     <PhoneInput
+                                        className="dark:text-black"
                                         {...field}
                                         inputStyle={{ width: '100%', borderColor: `${errors.phoneNumber ? 'red' : 'gray'}`, paddingTop: '24px', paddingBottom: '24px' }}
                                         country={'sy'}

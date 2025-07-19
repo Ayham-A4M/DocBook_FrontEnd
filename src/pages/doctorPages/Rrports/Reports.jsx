@@ -25,7 +25,7 @@ const Reports = () => {
 
             {/* Stats Cards */}
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-10">
-                <StatsCard icon={<FiFileText className=" text-[var(--main-blue)] text-3xl" />} borderColor={'border-[var(--main-blue)]'} status={'Total Reports'} value={reports?.length} />
+                <StatsCard icon={<FiFileText className=" text-[var(--main-blue)] text-3xl" />} borderColor={'border-[var(--main-blue)]'} status={'Reports'} value={reports?.length} />
                 <StatsCard icon={<FiActivity className="text-green-600 dark:text-green-400 text-3xl" />} borderColor={'border-green-600 dark:border-green-400'} status={'Completed'} value={reportStats?.completed} />
                 <StatsCard icon={<FiPieChart className="text-gray-700 dark:text-gray-200 text-3xl" />} borderColor={'border-gray-700 dark:border-gray-300'} status={'Archived'} value={reportStats?.archived} />
             </div>

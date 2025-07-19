@@ -3,6 +3,8 @@ import { NavLink } from "react-router-dom"
 import Logo from "../Logo"
 import LoginORLogout from "../LoginORLogout"
 import { ModeToggle } from "../dark-light-button"
+import { memo } from 'react';
+
 const SideBar = ({ showSideBar, setShowSideBar }) => {
     return (
         <>
@@ -51,4 +53,4 @@ const SideBar = ({ showSideBar, setShowSideBar }) => {
     )
 }
 
-export default SideBar
+export default memo(SideBar)

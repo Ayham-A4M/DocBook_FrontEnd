@@ -2,6 +2,7 @@ import PhoneInput from 'react-phone-input-2'
 import 'react-phone-input-2/lib/style.css'
 import { Controller } from 'react-hook-form';
 import FormErrorMessage from'../../../components/FormErrorMessage'
+import { memo } from "react";
 
 const InfoCard = ({ name, icon, errors,infoName, isEditing, value,isNumber = false,register,control }) => {
 
@@ -67,4 +68,4 @@ const InfoCard = ({ name, icon, errors,infoName, isEditing, value,isNumber = fal
     )
 }
 
-export default InfoCard
+export default memo(InfoCard)

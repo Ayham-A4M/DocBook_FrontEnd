@@ -4,28 +4,28 @@ import useGetMyAppointments from '../../hooks/useGetMyAppointments';
 import FilterButton from './FilterButton';
 import PaginationButtons from '../../components/PaginationButtons';
 import Loader2 from '../../components/Loader2'
-import Header from './Header';
 import StatsCard from '../../components/StatsCard';
 import MainTitle from '../../components/MainTitle'
-
+import { memo } from "react"
 const MyAppointments = () => {
+    
 
-    const { appointments, appointmentStats, setAppointmentsType, page, setPage, limit, sendingReq } = useGetMyAppointments();
+    const { appointments, setAppointments, appointmentStats, setAppointmentsType, page, setPage, limit, sendingReq } = useGetMyAppointments();
 
     return (
 
         <div className="py-3  mb-8  mx-auto">
 
             {
-                (appointments && appointmentStats) &&
+
                 <>
-                    <MainTitle mainTitle={'Appointment Tracker'} subTitle={'View and manage your medical visits'}/>
+                    <MainTitle mainTitle={'Appointment Tracker'} subTitle={'View and manage your medical visits'} />
                     {/* Stats Cards */}
                     <div className="grid  md:grid-cols-4 grid-cols-2 gap-4 mb-6">
-                        <StatsCard status={'Appointments'} borderColor={'border-blue-400'} value={appointmentStats.total}/>
-                        <StatsCard status={'Confirmed'} borderColor={'border-green-500'} value={appointmentStats.confirmed}/>
-                        <StatsCard status={'Pending'} borderColor={'border-yellow-500'} value={appointmentStats.pending}/>
-                        <StatsCard status={'Canceled'} borderColor={'border-red-500'} value={appointmentStats.canceled}/>
+                        <StatsCard status={'Appointments'} borderColor={'border-blue-400'} value={appointmentStats?.total || 0} />
+                        <StatsCard status={'Confirmed'} borderColor={'border-green-500'} value={appointmentStats?.confirmed || 0} />
+                        <StatsCard status={'Pending'} borderColor={'border-yellow-500'} value={appointmentStats?.pending || 0} />
+                        <StatsCard status={'Canceled'} borderColor={'border-red-500'} value={appointmentStats?.canceled || 0} />
                     </div>
 
                     {/* Appointments Table */}
@@ -41,31 +41,33 @@ const MyAppointments = () => {
                         </div>
 
                         <div className="overflow-x-auto">
-                            <table className="min-w-full divide-y divide-gray-200">
+                            <table className="w-full min-w-[650px] divide-y divide-gray-200">
                                 <TableHead />
-                                {
-                                    sendingReq ?
-                                        <tbody className="w-full">
-
+                                <tbody className=" w-full divide-y divide-gray-200">
+                                    {
+                                        sendingReq ?
                                             <tr>
-                                                <td colSpan={6} className="py-6 w-full">
+                                                <td colSpan={7} className="py-6 w-full">
                                                     <div className="flex justify-center items-center h-full">
                                                         <Loader2 />
                                                     </div>
                                                 </td>
                                             </tr>
 
-                                        </tbody>
-                                        :
-                                        <tbody className=" divide-y divide-gray-200">
-                                            {
+                                            :
+                                            appointments && appointments.length > 0 ?
 
-                                                appointments.map((appointment) => (
-                                                    <TableRow dcotorName={appointment.doctorName} fee={appointment.fee} date={appointment.date} time={appointment.time} specialization={appointment.doctorSpecialization} status={appointment.status} image={appointment.doctorImage} id={appointment._id} key={appointment._id} />
+                                                appointments?.map((appointment) => (
+                                                    <TableRow dcotorName={appointment.doctorName} fee={appointment.fee} date={appointment.date} time={appointment.time} specialization={appointment.doctorSpecialization} status={appointment.status} image={appointment.doctorImage} id={appointment._id} setAppointments={setAppointments} />
                                                 ))
-                                            }
-                                        </tbody>
-                                }
+                                                :
+                                                <tr >
+                                                    <td className='text-slate-500  text-center py-6 dark:text-slate-300' colSpan={7}>
+                                                        No appointments
+                                                    </td>
+                                                </tr>
+                                    }
+                                </tbody>
 
                             </table>
                         </div>
@@ -79,6 +81,7 @@ const MyAppointments = () => {
 
         </div>
     );
+
 };
 
-export default MyAppointments;
+export default memo(MyAppointments);

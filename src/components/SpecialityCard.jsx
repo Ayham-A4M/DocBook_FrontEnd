@@ -1,4 +1,5 @@
 
+import { memo } from 'react';
 const SpecialityCard = ({pic,title}) => {
   return (
     <div className="flex flex-col duration-300 hover:translate-y-[-5px] hover:scale-[1.04] items-center justify-center gap-1.5 p-2.5 w-fit">
@@ -10,4 +11,4 @@ const SpecialityCard = ({pic,title}) => {
   )
 }
 
-export default SpecialityCard
+export default memo(SpecialityCard);

@@ -5,7 +5,7 @@ import { format } from "date-fns"
 // note its svae report update appointment to confirm and increament doctor patientTreatments by 1
 const handleSaveReport = async (report, appointmentId) => {
     const { url } = useGetEnviromentVariable()
-    const date = format(new Date(), 'yyyy-MM-dd');
+    const date =new Date();
     try {
         const response = await axios.post(`${url}/api/doctor/confirmAppointment`, { report: { ...report, date: date }, appointmentId }, { withCredentials: true })
         if (response.status == 200) {

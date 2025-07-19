@@ -1,9 +1,8 @@
 
 
 import * as React from "react"
-import { TrendingUp } from "lucide-react"
 import { Label, Pie, PieChart } from "recharts"
-import { format,endOfMonth } from "date-fns"
+import { format, endOfMonth } from "date-fns"
 import {
   Card,
   CardContent,
@@ -13,7 +12,7 @@ import {
   CardTitle,
 } from "@/components/ui/card"
 import {
- 
+
   ChartContainer,
   ChartTooltip,
   ChartTooltipContent,
@@ -31,7 +30,7 @@ export const description = "A donut chart with text"
 const chartConfig = {
   Count: {
     label: "count",
-  
+
   },
   chrome: {
     label: "Confirmed",
@@ -46,10 +45,10 @@ const chartConfig = {
     color: "#de3f3fd1",
   },
 
-} 
+}
 
-function AppointmentStatusPieChart({chartData}) {
-  const totalVisitors = React.useMemo(() => {
+function AppointmentStatusPieChart({ chartData }) {
+  const totalPitents = React.useMemo(() => {
     return chartData.reduce((acc, curr) => acc + curr.count, 0)
   }, [])
 
@@ -57,7 +56,7 @@ function AppointmentStatusPieChart({chartData}) {
     <Card className="flex flex-col">
       <CardHeader className="items-center pb-0">
         <CardTitle>Pie Chart - Donut</CardTitle>
-        <CardDescription>1-{`${format(new Date(),'MMMM')} ___ ${format(endOfMonth(new Date()),'dd-MMMM')}`}</CardDescription>
+        <CardDescription>1-{`${format(new Date(), 'MMMM')} ___ ${format(endOfMonth(new Date()), 'dd-MMMM')}`}</CardDescription>
       </CardHeader>
       <CardContent className="flex-1 pb-0">
         <ChartContainer
@@ -91,26 +90,28 @@ function AppointmentStatusPieChart({chartData}) {
                           y={viewBox.cy}
                           className="fill-foreground text-3xl font-bold"
                         >
-                          {totalVisitors.toLocaleString()}
+                          {totalPitents}
                         </tspan>
                         <tspan
                           x={viewBox.cx}
                           y={(viewBox.cy || 0) + 24}
                           className="fill-muted-foreground"
                         >
-                          Visitors
+                          Patients
                         </tspan>
                       </text>
                     )
                   }
                 }}
               />
+            
+
             </Pie>
           </PieChart>
         </ChartContainer>
       </CardContent>
       <CardFooter className="flex-col gap-2 text-sm">
-        
+
         <div className="text-muted-foreground leading-none">
           Showing total appointments status for this month
         </div>

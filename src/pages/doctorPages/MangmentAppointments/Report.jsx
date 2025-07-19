@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button"
 import handleSaveReport from "./handler/handleSaveReport";
 import { FaTrash } from "react-icons/fa";
 import { useState } from "react";
+import { memo } from "react";
 import {
     Dialog,
     DialogClose,
@@ -23,7 +24,7 @@ import { useForm, Controller } from "react-hook-form";
 import * as yup from 'yup'
 import { yupResolver } from '@hookform/resolvers/yup'
 import FormErrorMessage from '../../../components/FormErrorMessage'
-const Report = ({ setAppointmentId, appointmentId, setAppointments }) => {
+const Report = ({ appointmentId, setAppointments }) => {
     const [open, setOpen] = useState(false);
     const [medicineValue, setMedicineValue] = useState('');
     const [noteValue, setNoteValue] = useState('');
@@ -75,7 +76,6 @@ const Report = ({ setAppointmentId, appointmentId, setAppointments }) => {
 
 
     const submitReport = async (data) => {
-        console.log(data)
 
         const response = await handleSaveReport(data, appointmentId)
         if (response) {
@@ -89,7 +89,7 @@ const Report = ({ setAppointmentId, appointmentId, setAppointments }) => {
     return (
         <Dialog open={open} setOpenChange={setOpen}>
             <DialogTrigger asChild>
-                <Button className="bg-green-600  gap-0 hover:bg-green-700  text-white py-5" onClick={(e) => { setAppointmentId(appointmentId); setOpen(true) }}>
+                <Button className="bg-green-600  gap-0 hover:bg-green-700  text-white py-5" onClick={(e) => { setOpen(true) }}>
                     <MdDone className="mr-2" /> Confirm
                 </Button>
             </DialogTrigger>
@@ -301,7 +301,7 @@ const Report = ({ setAppointmentId, appointmentId, setAppointments }) => {
         </Dialog >
     )
 }
-export default Report
+export default memo(Report)
 
 
 

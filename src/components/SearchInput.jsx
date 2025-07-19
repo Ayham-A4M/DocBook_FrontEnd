@@ -1,4 +1,5 @@
 import { FaSearch } from "react-icons/fa"
+import { memo } from 'react';
 
 const SearchInput = ({ searchValue, setSearchValue }) => {
 
@@ -10,4 +11,4 @@ const SearchInput = ({ searchValue, setSearchValue }) => {
     )
 }
 
-export default SearchInput
+export default memo(SearchInput)

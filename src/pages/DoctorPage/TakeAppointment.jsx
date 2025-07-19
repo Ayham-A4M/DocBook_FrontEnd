@@ -1,6 +1,6 @@
 import { FaCreditCard } from "react-icons/fa6";
 import Title from "./Title";
-import { endOfMonth, format, isBefore, isEqual, isToday, isWithinInterval } from "date-fns";
+import { endOfMonth, format, isEqual, isToday, isWithinInterval, parse } from "date-fns";
 import { IoCalendarOutline } from "react-icons/io5";
 import { IoIosClock } from "react-icons/io";
 import { BsFillPatchQuestionFill } from "react-icons/bs";
@@ -14,7 +14,7 @@ import 'react-datepicker/dist/react-datepicker.css';
 const TakeAppointment = ({ nextHolidays, workingDays, doctorId, fee }) => {
     const navigate = useNavigate();
     const [date, setDate] = useState('');
-    const [time, setTime] = useState('');
+    const [time, setTime] = useState(null);
     const [paymentWay, setPaymentWay] = useState(null);
     const [reason, setReason] = useState('');
     const { takedAppointments, sendReq } = useGetTakedAppointments(date, doctorId);
@@ -24,7 +24,7 @@ const TakeAppointment = ({ nextHolidays, workingDays, doctorId, fee }) => {
 
     const isNotHoliday = (date) => {
         return nextHolidays?.every((e) => (
-            e.date != format(date, 'yyyy-MM-dd')
+            !isEqual(e.date,date)
         ))
     };
     const isValidDay = useMemo(() => {
@@ -46,9 +46,9 @@ const TakeAppointment = ({ nextHolidays, workingDays, doctorId, fee }) => {
                 <DatePicker
                     className='inputStyle w-full pl-0'
                     selected={date}
-                    onChange={(date) => { setDate(format(date, 'yyyy-MM-dd')); console.log(isBefore(date, endOfMonth(new Date()))) }}
+                    onChange={(date) => { setDate(date)}}
                     filterDate={isValidDay}
-                    placeholderText="Select a holiday date"
+                    placeholderText="Select appointment date"
                 />
             </div>
 
@@ -61,13 +61,14 @@ const TakeAppointment = ({ nextHolidays, workingDays, doctorId, fee }) => {
             ) : (
                 <div className="grid grid-cols-3 sm:grid-cols-5 gap-2">
                     {times.map((e, i) => {
-                        const status = takedAppointments?.some((ele) => ele.time === e);
+                        const status = takedAppointments?.some((ele) => format(ele.time,'h:mm a')=== e);
                         return (
                             <button
                                 key={i}
                                 disabled={status}
-                                onClick={(ev) => { ev.preventDefault(); setTime(e); }}
-                                className={`py-2 px-3  cursor-pointer rounded-lg text-sm font-medium transition-all duration-300 ${time === e
+                                onClick={(ev) => { ev.preventDefault(); setTime({displayTime:e,isoTime:parse(e,'h:mm a',new Date())}); }}
+                                // onClick={(ev) => { ev.preventDefault(); setTime(e); }}
+                                className={`py-2 px-3  cursor-pointer rounded-lg text-sm font-medium transition-all duration-300 ${time?.displayTime === e
                                     ? 'bg-blue-500 text-white shadow-md'
                                     : status
                                         ? 'bg-gray-300 text-gray-500 cursor-not-allowed'

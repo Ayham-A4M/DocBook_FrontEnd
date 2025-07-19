@@ -10,7 +10,7 @@ const handleCreateNewComment = async (stars, halfStar, opinion, feeling, doctorI
     }
     // calculating rate ex: 4.5 , 5  , 3.5 ...
     const rate = stars + (halfStar * 0.5);
-    const date = format(new Date(), "yyyy-MM-dd");
+    const date = new Date();
 
     try {
         setSendingReq(true);

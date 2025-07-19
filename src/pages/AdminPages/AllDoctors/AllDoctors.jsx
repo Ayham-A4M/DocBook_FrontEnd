@@ -63,47 +63,40 @@ const AllDoctors = () => {
 
 
                                     :
-                                    data?.doctors?.map((doctor) => (
-                                        <tr
-                                            key={doctor._id}
-                                            className="border-b px-2 border-gray-100 hover:bg-gray-50 dark:hover:bg-gray-800 transition duration-200"
-                                        >
-                                            <td className=" text-gray-900 px-3  font-medium">
-                                                <div className="w-fit aspect-square rounded-full border-gray-500 border-[2px]">
-                                                    <img src={`http://localhost:8000${doctor.image}`} className="rounded-full w-8 aspect-square object-cover " />
-                                                </div>
+                                    data?.doctors && data?.doctors?.length > 0
+                                        ?
+                                        data?.doctors?.map((doctor) => (
+                                            <tr
+                                                key={doctor._id}
+                                                className="border-b px-2 border-gray-100 hover:bg-gray-50 dark:hover:bg-gray-800 transition duration-200"
+                                            >
+                                                <td className=" text-gray-900 px-3  font-medium">
+                                                    <div className="w-fit aspect-square rounded-full border-gray-500 border-[2px]">
+                                                        <img src={`http://localhost:8000${doctor.image}`} className="rounded-full w-8 aspect-square object-cover " />
+                                                    </div>
+                                                </td>
+                                                <td className="text-center text-popover-foreground font-medium">{doctor.fullName}</td>
+                                                <td className=" text-center text-gray-600 dark:text-gray-300">{doctor.specialization}</td>
+                                                <td className=" text-center text-gray-600 dark:text-gray-300">{doctor.experience}</td>
+                                                <td className=" text-center text-gray-600 dark:text-gray-300">{doctor.age}</td>
+                                                <td className="p-9 text-yellow-500 flex items-center"><FaStar className="mr-1" /> {doctor.rate}  </td>
+                                                <td className="">
+                                                    <EditButton setDoctorId={setDoctorId} doctorId={doctor._id} />
+                                                </td>
+                                                <td className="">
+                                                    <button className="px-4 rounded-[4px] text-slate-100 cursor-pointer bg-red-500 font-light py-1" onClick={(e) => { e.preventDefault(); setDoctorId(doctor._id); setShowDeletePopUp(true) }}>
+                                                        Delete
+                                                    </button>
+                                                </td>
+
+                                            </tr>
+                                        ))
+                                        :
+                                        <tr>
+                                            <td className="py-6 text-slate-500 dark:text-slate-300 text-center" colSpan={8}>
+                                                No doctors in system
                                             </td>
-                                            <td className="text-center text-popover-foreground font-medium">{doctor.fullName}</td>
-                                            <td className=" text-center text-gray-600 dark:text-gray-300">{doctor.specialization}</td>
-                                            <td className=" text-center text-gray-600 dark:text-gray-300">{doctor.experience}</td>
-                                            <td className=" text-center text-gray-600 dark:text-gray-300">{doctor.age}</td>
-                                            <td className="p-9 text-yellow-500 flex items-center"><FaStar className="mr-1" /> {doctor.rate}  </td>
-                                            <td className="">
-                                                <EditButton setDoctorId={setDoctorId} doctorId={doctor._id} />
-
-
-
-                                                {/* <button onClick={(e) => { e.preventDefault(); setShowEditPopUp(true); setDoctorId(doctor._id) }} className="px-4 rounded-[4px] text-slate-100 cursor-pointer bg-gray-500 font-light py-1">
-                                                    Edit
-                                                </button> */}
-
-
-
-
-
-
-
-
-
-                                            </td>
-                                            <td className="">
-                                                <button className="px-4 rounded-[4px] text-slate-100 cursor-pointer bg-red-500 font-light py-1" onClick={(e) => { e.preventDefault(); setDoctorId(doctor._id); setShowDeletePopUp(true) }}>
-                                                    Delete
-                                                </button>
-                                            </td>
-
                                         </tr>
-                                    ))
 
                             }
 

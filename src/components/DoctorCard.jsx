@@ -1,4 +1,4 @@
-
+import { memo } from 'react';
 import { NavLink } from 'react-router-dom';
 import {
   FaUserMd,
@@ -95,4 +95,4 @@ const DoctorCard = ({ doctor }) => {
   );
 };
 
-export default DoctorCard;
+export default memo(DoctorCard);

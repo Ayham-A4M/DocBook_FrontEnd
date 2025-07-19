@@ -8,7 +8,7 @@ const useGetMyAppointments = () => {
     const [limit, setLimit] = useState(false);
     const [myAppointments, setMyAppointments] = useState(null);
     const [appointmentStats, setAppointmentStats] = useState(null);
-    const [sendingReq,setSendingReq]=useState(false);
+    const [sendingReq, setSendingReq] = useState(false);
     const [appointmentsType, setAppointmentsType] = useState('mixed');
     const calculateStats = (appointments) => {
         let canceled = 0
@@ -35,15 +35,15 @@ const useGetMyAppointments = () => {
                     calculateStats(response.data.appointments);
                 }
             } catch (err) {
-                
+
                 toast.error(err.response?.data?.msg);
-            }finally{
+            } finally {
                 setSendingReq(false);
             }
         }
         getAppointments();
     }, [appointmentsType, page])
-    return { appointments: myAppointments, appointmentStats, setAppointmentsType, page, setPage,limit,sendingReq };
+    return { appointments: myAppointments, setAppointments: setMyAppointments, appointmentStats, setAppointmentsType, page, setPage, limit, sendingReq };
 }
 
 export default useGetMyAppointments

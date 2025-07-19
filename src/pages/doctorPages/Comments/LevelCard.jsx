@@ -4,6 +4,8 @@ import { BsStars } from "react-icons/bs";
 import { GiStethoscope } from "react-icons/gi";
 import { RiMedalFill } from "react-icons/ri";
 import { FaCrown,FaSeedling } from "react-icons/fa6";
+import { memo } from 'react';
+
 const doctorLevel = (rate) => {
     const Levels = {
         "Newbie": { icon: <FaSeedling className="text-[25px] text-green-400" />, title: 'Newbie' },
@@ -29,4 +31,4 @@ const LevelCard = ({ doctorRate }) => {
     )
 }
 
-export default LevelCard
+export default memo(LevelCard)

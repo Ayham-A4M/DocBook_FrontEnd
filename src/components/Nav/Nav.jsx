@@ -7,6 +7,8 @@ import { ModeToggle } from "../dark-light-button";
 import Logo from "../Logo";
 import SideBar from "./SideBar";
 import LoginORLogout from "../LoginORLogout";
+import { memo } from 'react';
+
 const Nav = () => {
   const [showSideBar, setShowSideBar] = useState(false);
   const [showDropMenue, setShowDropMenu] = useState(false);
@@ -45,4 +47,4 @@ const Nav = () => {
   )
 }
 
-export default Nav
+export default memo(Nav)

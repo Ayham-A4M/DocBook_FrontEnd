@@ -6,6 +6,8 @@ import handleChangeReportStatus from './handler/handleChangeReportStatus';
 import {
     Card,
 } from "@/components/ui/card"
+import dateFormat from '../../../helper/dateFormat'
+import { memo } from "react";
 
 const ReportCard = ({ report, setReports }) => {
 
@@ -45,7 +47,7 @@ const ReportCard = ({ report, setReports }) => {
             <div className="space-y-2 text-gray-600 dark:text-gray-300">
                 <div className="flex items-center">
                     <FiCalendar className="text-[var(--main-blue)] mr-2" />
-                    <span>{report.date}</span>
+                    <span>{dateFormat(report.date)}</span>
                 </div>
                 <div className="flex items-center  ">
                     <FiFileText className="text-[var(--main-blue)] mr-2" />
@@ -65,9 +67,8 @@ const ReportCard = ({ report, setReports }) => {
                     }
                 </div>
             </div>
-            {/* </div> */}
         </Card>
     )
 }
 
-export default ReportCard
+export default memo(ReportCard)

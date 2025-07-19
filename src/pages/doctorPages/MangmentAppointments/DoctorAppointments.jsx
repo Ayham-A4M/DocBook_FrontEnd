@@ -1,5 +1,4 @@
 
-import { useState } from "react";
 import { FaCalendarAlt } from 'react-icons/fa';
 import StatusInformation from "./StatusInformation";
 import AppointmentCard from "./AppointmentCard";
@@ -8,8 +7,6 @@ import useGetTodayAppointments from '../../../hooks/doctors/useGetTodayAppointme
 import MainTitle from "../../../components/MainTitle";
 const DoctorAppointments = () => {
     const { appointments, loading, setAppointments } = useGetTodayAppointments();
-    const [appointmentId, setAppointmentId] = useState(null);
-
 
     return (
         <div className="mx-auto max-w-7xl p-1 md:p-8">
@@ -24,7 +21,7 @@ const DoctorAppointments = () => {
                 <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
                     {appointments.map(appointment => (
 
-                        <AppointmentCard key={appointment._id} appointment={appointment} appointments={appointments} setAppointments={setAppointments} setAppointmentId={setAppointmentId}  />
+                        <AppointmentCard key={appointment._id} appointment={appointment} appointments={appointments} setAppointments={setAppointments}   />
 
 
                     ))}

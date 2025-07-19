@@ -1,4 +1,5 @@
 import { Checkbox } from "@/components/ui/checkbox"
+import { memo } from 'react';
 
 
 const WorkingDayCheckBox = ({ day, changeWorkingDays }) => {
@@ -14,4 +15,4 @@ const WorkingDayCheckBox = ({ day, changeWorkingDays }) => {
     )
 }
 
-export default WorkingDayCheckBox
+export default memo(WorkingDayCheckBox)

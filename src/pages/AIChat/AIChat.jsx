@@ -51,7 +51,7 @@ const AIChat = () => {
     }
     else {
       setMessages(prev => [...prev, {
-        text: response?.response?.data?.err?.name || response.response.data.msg,
+        text: response?.response?.data?.err?.name || response.response?.data?.msg || 'Ooops something went wrong !!',
         sender: 'AI',
         timestamp: `${getTimeNow()}`,
       }])
@@ -95,7 +95,7 @@ const AIChat = () => {
 
       {/* Input Area */}
       
-      <div className="bg-slate-300 dark:bg-slate-800 fixed bottom-[20px] rounded-lg  left-[50%] translate-x-[-50%] max-w-4xl w-[90%] p-6 flex items-center space-x-3">
+      <div className="bg-slate-200 dark:bg-slate-800 fixed bottom-[20px] rounded-lg  left-[50%] translate-x-[-50%] max-w-4xl w-[90%] md:p-6 p-4 flex items-center space-x-3">
         <Input type="text" value={message} onChange={(e) => setMessage(e.target.value)} placeholder="Ask your health question..." className="py-6 border-popover-foreground"  />
         <button
           disabled={loading}

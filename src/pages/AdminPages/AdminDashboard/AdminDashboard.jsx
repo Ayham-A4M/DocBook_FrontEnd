@@ -1,4 +1,4 @@
-import { FaStethoscope, FaNotesMedical, FaListAlt, FaCalendarCheck,FaChartArea } from 'react-icons/fa';
+import { FaStethoscope, FaNotesMedical, FaListAlt, FaCalendarCheck, FaChartArea } from 'react-icons/fa';
 import { FaUsers } from "react-icons/fa6";
 import { GiMoneyStack } from "react-icons/gi";
 import { FaUserDoctor } from "react-icons/fa6";
@@ -8,6 +8,7 @@ import useAxios from '../../../hooks/useAxios';
 import AdminDashboardSkeleton from './AdminDashboardSkeleton';
 import MainTitle from '../../../components/MainTitle'
 import { IoIosTrendingUp, IoIosTrendingDown } from "react-icons/io";
+import { MdOutlineStackedLineChart } from "react-icons/md";
 import ChartAreaStacked from './stacked-area-chart';
 import AppointmentStatusPieChart from './Pie-Chart';
 const specColors = {
@@ -40,7 +41,6 @@ const prepareChartData = (chartData) => {
             }
         }
     })
-    defaultData.map((e) => { console.log(e) })
     return defaultData;
 }
 
@@ -76,7 +76,11 @@ const AdminDashboard = () => {
                     ?
                     <IoIosTrendingUp className='text-[25px] text-green-400' />
                     :
-                    <IoIosTrendingDown className='text-[25px] text-red-500' />
+                    percent == 0
+                        ?
+                        <MdOutlineStackedLineChart className='text-[20px] text-slate-800 dark:text-slate-200' />
+                        :
+                        <IoIosTrendingDown className='text-[25px] text-red-500' />
             }
 
 
@@ -96,12 +100,12 @@ const AdminDashboard = () => {
 
                             {/* Quick Statistics */}
                             <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
-                                <StatsCard icon={<FaUsers className="text-blue-400 text-2xl" />} status={'Total Patients'} value={data?.usersNumber||0} borderColor={'border-blue-500'} />
-                                <StatsCard icon={<FaStethoscope className="text-emerald-500 text-2xl" />} status={'Total Doctors'} value={data?.doctorsNumber||0} borderColor={'border-emerald-500'} />
-                                <StatsCard icon={<FaNotesMedical className="text-rose-700 text-2xl" />} status={'Total Reports'} value={data?.reportsNumber||0} borderColor={'border-rose-700'} />
-                                <StatsCard icon={<FaCalendarCheck className="text-gray-600 dark:text-slate-200 text-2xl " />} status={'Appointments Today'} value={data?.todayAppointmentsNumber||0} borderColor={'border-gray-600 dark:border-slate-200'} />
-                                <StatsCard icon={<GiMoneyStack className="text-green-500 text-2xl" />} status={'This Month Income'} value={`${data?.thisMonthIncome || 0}$`} borderColor={'border-green-500'} />   
-                                <StatsCard icon={<FaChartArea className="text-orange-500 text-2xl" />} status={'Monthly Growth'} value={getPercentage(data?.monthlyGrowthPercentage||0)} borderColor={'border-orange-500'} />
+                                <StatsCard icon={<FaUsers className="text-blue-400 text-2xl" />} status={'Total Patients'} value={data?.usersNumber || 0} borderColor={'border-blue-500'} />
+                                <StatsCard icon={<FaStethoscope className="text-emerald-500 text-2xl" />} status={'Total Doctors'} value={data?.doctorsNumber || 0} borderColor={'border-emerald-500'} />
+                                <StatsCard icon={<FaNotesMedical className="text-rose-700 text-2xl" />} status={'Total Reports'} value={data?.reportsNumber || 0} borderColor={'border-rose-700'} />
+                                <StatsCard icon={<FaCalendarCheck className="text-gray-600 dark:text-slate-200 text-2xl " />} status={'Appointments Today'} value={data?.todayAppointmentsNumber || 0} borderColor={'border-gray-600 dark:border-slate-200'} />
+                                <StatsCard icon={<GiMoneyStack className="text-green-500 text-2xl" />} status={'This Month Income'} value={`${data?.thisMonthIncome || 0}$`} borderColor={'border-green-500'} />
+                                <StatsCard icon={<FaChartArea className="text-orange-500 text-2xl" />} status={'Monthly Growth'} value={getPercentage(data?.monthlyGrowthPercentage || 0)} borderColor={'border-orange-500'} />
                             </div>
                             {
 

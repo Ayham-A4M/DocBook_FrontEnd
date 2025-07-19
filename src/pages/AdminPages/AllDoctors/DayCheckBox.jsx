@@ -1,5 +1,7 @@
 
 import { Checkbox } from "@/components/ui/checkbox"
+import { memo } from 'react';
+
 const DayCheckBox = ({ value, workingDays,changeWorkingDays }) => {
 
     return (
@@ -8,10 +10,8 @@ const DayCheckBox = ({ value, workingDays,changeWorkingDays }) => {
                 {value}
             </label>
             <Checkbox className="size-[20px] cursor-pointer border-popover-foreground" checked={workingDays.includes(value)} value={value} onCheckedChange={(e) => { changeWorkingDays(e, value) }} />
-
-            {/* <input type="checkbox" checked={workingDays.includes(value)} value={value} onChange={(e) => { changeWorkingDays(e, value) }} className="w-[20px] aspect-square cursor-pointer" /> */}
         </div>
     )
 }
 
-export default DayCheckBox
+export default memo(DayCheckBox)

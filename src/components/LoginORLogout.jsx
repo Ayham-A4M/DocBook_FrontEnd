@@ -8,6 +8,8 @@ import { IoLogOut } from "react-icons/io5";
 import { BsFillKeyFill } from "react-icons/bs";
 import toast from "react-hot-toast";
 import { Button } from '@/components/ui/button'
+import { memo } from 'react';
+
 const LoginORLogout = ({ theme }) => {
     const { user, setUser } = useUser();
     const navigate = useNavigate();
@@ -31,28 +33,28 @@ const LoginORLogout = ({ theme }) => {
             {
                 user
                     ?
-                 
-                        <Button variant="outline"
-                            size="icon"
-                            onClick={() => handleLogout()}
-                            className="relative z-20">
 
-                            <IoLogOut className="text-red-500 size-[1.2rem]" />
-                        </Button>
-                      
-                       
+                    <Button variant="outline"
+                        size="icon"
+                        onClick={() => handleLogout()}
+                        className="relative z-20">
+
+                        <IoLogOut className="text-red-500 size-[1.2rem]" />
+                    </Button>
+
+
 
                     :
-                 
-                        <NavLink to={'/login_signup'}>
-                            <Button variant="outline"
+
+                    <NavLink to={'/login_signup'}>
+                        <Button variant="outline"
                             size="icon"
                             className="relative z-20">
                             <BsFillKeyFill className=" text-popover-foreground size-[1.2rem]" />
                         </Button>
-                            
-                        </NavLink>
-                        
+
+                    </NavLink>
+
             }
 
 
@@ -63,4 +65,4 @@ const LoginORLogout = ({ theme }) => {
     )
 }
 
-export default LoginORLogout
+export default memo(LoginORLogout)

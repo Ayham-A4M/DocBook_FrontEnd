@@ -1,4 +1,5 @@
 
+import { memo } from 'react';
 
 const StatusInformation = ({appointmensLength}) => {
     return (
@@ -24,4 +25,4 @@ const StatusInformation = ({appointmensLength}) => {
     )
 }
 
-export default StatusInformation
+export default memo(StatusInformation)

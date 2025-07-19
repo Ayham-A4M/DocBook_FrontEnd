@@ -1,4 +1,5 @@
 
+import { memo } from "react";
 
 const InfoSquare = ({icon,value,title}) => {
     return (
@@ -11,4 +12,4 @@ const InfoSquare = ({icon,value,title}) => {
     )
 }
 
-export default InfoSquare
+export default memo(InfoSquare)

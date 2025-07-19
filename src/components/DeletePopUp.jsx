@@ -1,7 +1,6 @@
-
+import { memo } from 'react';
 import { FaExclamationTriangle, FaTimes, FaTrash } from "react-icons/fa";
 import { useState } from "react";
-import toast from "react-hot-toast";
 const DeletePopUp = ({ setShowDeletePopUp, deleteFunction, deleteId }) => {
     const [confirmationText, setConfirmationText] = useState("");
     const [isConfirmed, setIsConfirmed] = useState(false);
@@ -94,4 +93,4 @@ const DeletePopUp = ({ setShowDeletePopUp, deleteFunction, deleteId }) => {
     );
 };
 
-export default DeletePopUp;
+export default memo(DeletePopUp);

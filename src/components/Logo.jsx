@@ -1,5 +1,5 @@
 import { IoPulseOutline } from "react-icons/io5";
-
+import { memo } from 'react';
 const Logo = ({ color,size }) => {
     return (
         <div className={`flex items-center w-fit gap-1  ${size?size:'text-[18px]'}  ${color ? color : 'text-[var(--main-blue)]'} `}>
@@ -10,4 +10,4 @@ const Logo = ({ color,size }) => {
     )
 }
 
-export default Logo
+export default memo(Logo)

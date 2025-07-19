@@ -1,6 +1,7 @@
 import { FaCalendarAlt } from "react-icons/fa"
 import { FaTrash } from "react-icons/fa"
 import { Button } from '@/components/ui/button';
+import { memo } from 'react';
 const HolidayCard = ({ holiday, deleteHoliday }) => {
 
     return (
@@ -35,4 +36,4 @@ const HolidayCard = ({ holiday, deleteHoliday }) => {
     )
 }
 
-export default HolidayCard
+export default memo(HolidayCard)

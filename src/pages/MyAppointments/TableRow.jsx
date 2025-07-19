@@ -1,10 +1,13 @@
 import { Link } from 'react-router-dom'
-import { FaUserMd, FaClock, } from 'react-icons/fa';
+import { FaUserMd} from 'react-icons/fa';
 import handleCancelAppointment from './handler/handleCancelAppointment';
-const TableRow = ({ image, fee, dcotorName, specialization, date, time, status, id }) => {
-
+import { format } from 'date-fns';
+import { useState } from 'react';
+import { memo } from "react"
+const TableRow = ({ image, fee, dcotorName, specialization, date, time, status, id,setAppointments }) => {
+    const [disableCancelButton,setDisableCancelButton]=useState(false);
     return (
-        <tr className="hover:bg-gray-50 dark:hover:bg-gray-800">
+        <tr className="hover:bg-gray-50 dark:hover:bg-gray-800" key={id}>
             <td className="px-6 py-4 whitespace-nowrap">
                 <div className="flex items-center gap-3">
                     <img
@@ -24,10 +27,10 @@ const TableRow = ({ image, fee, dcotorName, specialization, date, time, status, 
                 <div className="text-gray-600 dark:text-slate-300">{specialization}</div>
             </td>
             <td className="px-6 py-4 whitespace-nowrap">
-                <div className="font-medium">{date}</div>
-                <div className="text-sm text-gray-500 dark:text-slate-400 flex items-center gap-1">
-                    <FaClock size={12} /> {time}
-                </div>
+                <div className="font-medium">{format(date, 'yyyy-MM-dd')}</div>
+            </td>
+            <td className='px-6 py-4 text-gray-500 dark:text-slate-400'>
+                {format(time, 'h:mm a')}
             </td>
             <td className="px-6 py-4 whitespace-nowrap">
                 <span>${fee}</span>
@@ -45,7 +48,7 @@ const TableRow = ({ image, fee, dcotorName, specialization, date, time, status, 
             <td className="px-6 py-4 whitespace-nowrap">
                 {
                     status == 'pending' ?
-                        <button className="bg-red-500 text-slate-50 hover:translate-x-0.5 hover:shadow-2xl hover:shadow-gray-600 duration-300 rounded-[2px] px-3 py-1 cursor-pointer font-light text-sm" onClick={(e) => { e.preventDefault(); handleCancelAppointment(id) }}>
+                        <button disabled={disableCancelButton} className="bg-red-500 text-slate-50 hover:translate-x-0.5 hover:shadow-2xl hover:shadow-gray-600 duration-300 rounded-[2px] px-3 py-1 cursor-pointer font-light text-sm" onClick={(e) => { e.preventDefault(); handleCancelAppointment(id,setDisableCancelButton,setAppointments) }}>
                             Cancel
                         </button>
                         :
@@ -61,4 +64,4 @@ const TableRow = ({ image, fee, dcotorName, specialization, date, time, status, 
     )
 }
 
-export default TableRow
+export default memo(TableRow);

@@ -1,5 +1,4 @@
-
-
+import { memo } from "react"
 const FilterButton = ({ name, color, setAppointmentsType, setPage }) => {
     const changeFilter = (event) => {
         event.preventDefault();
@@ -11,4 +10,4 @@ const FilterButton = ({ name, color, setAppointmentsType, setPage }) => {
     )
 }
 
-export default FilterButton
+export default memo(FilterButton);

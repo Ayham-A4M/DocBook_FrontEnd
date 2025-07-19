@@ -1,15 +1,16 @@
-import { FaUserInjured, FaCalendarAlt, FaClock, FaNotesMedical } from 'react-icons/fa';
-import { MdDone, MdOutlineClose } from "react-icons/md";
+import { FaUserInjured, FaClock, FaNotesMedical } from 'react-icons/fa';
+import {  MdOutlineClose } from "react-icons/md";
 import handleCancelAppointment from './handler/handleCancelAppointment';
 import {
     Card,
-
 } from "@/components/ui/card"
+import timeFormat from '../../../helper/timeFormat'
 import { Button } from '@/components/ui/button'
 import Report from './Report';
+import { memo } from 'react';
 
 
-const AppointmentCard = ({ appointment, appointments, setAppointments, setAppointmentId }) => {
+const AppointmentCard = ({ appointment, appointments, setAppointments }) => {
     const submitCancelAppointment = async (status, appointmentId) => {
         const response = await handleCancelAppointment(appointmentId);
         if (response) {
@@ -41,7 +42,7 @@ const AppointmentCard = ({ appointment, appointments, setAppointments, setAppoin
             <div className="space-y-3 text-gray-600 dark:text-slate-300">
                 <div className="flex items-center ">
                     <FaClock className="text-blue-600 mr-3" />
-                    <span>{appointment.time}</span>
+                    <span>{timeFormat(appointment.time)}</span>
                 </div>
                 <div className="flex items-center">
                     <FaNotesMedical className="text-blue-600 mr-3" />
@@ -52,7 +53,7 @@ const AppointmentCard = ({ appointment, appointments, setAppointments, setAppoin
             {appointment.status === "pending" && (
                 <div className="mt-3 flex gap-3">
 
-                    <Report setAppointmentId={setAppointmentId} appointmentId={appointment._id} setAppointments={setAppointments}/>
+                    <Report  appointmentId={appointment._id} setAppointments={setAppointments}/>
                     <Button className="text-white hover:bg-red-600 py-5 bg-red-500 gap-0"
                         onClick={(e) => {
                             e.preventDefault();
@@ -70,4 +71,4 @@ const AppointmentCard = ({ appointment, appointments, setAppointments, setAppoin
     )
 }
 
-export default AppointmentCard
+export default memo(AppointmentCard)

@@ -50,7 +50,6 @@ const DoctorProfile = () => {
         setIsEditing(!isEditing);
     };
     const submitEdit = (data) => {
-        console.log(data);
         toggleEdit();
         handleSaveChanges(newImage, data,setProfile)
     }
@@ -124,11 +123,6 @@ const DoctorProfile = () => {
                                     <Button className="px-7 rounded-[4px] bg-blue-500 text-slate-200 hover:bg-blue-700 duration-300">
                                         Save Changes
                                     </Button>
-                                    {/* <Button className="px-7 rounded-[4px] bg-blue-500 text-slate-200 hover:bg-blue-700 duration-300" onClick={(e) => { e.preventDefault(); toggleEdit(); handleSaveChanges(editInformation, newImage, profile) }}>
-                                        Save Changes
-                                    </Button> */}
-
-
                                 </div>
                             )}
 

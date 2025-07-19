@@ -1,6 +1,7 @@
 import axios from "axios";
 import toast from "react-hot-toast"
 import useGetEnviromentVariable from '../../../hooks/useGetEnviromentVariable'
+import { format } from "date-fns";
 const handleCreateNewAppointment = async (doctorId, fee, date, time, reason, paymentWay) => {
  
     const { url } = useGetEnviromentVariable();
@@ -20,7 +21,7 @@ const handleCreateNewAppointment = async (doctorId, fee, date, time, reason, pay
             toast.error('you must choose payment way Stripe or Cash');
             return null;
         }
-        const response = await axios.post(`${url}/api/user/takeappointment`, { doctorId, date_time: `${date} ${time}`, date, time, fee, reason, paymentWay }, { withCredentials: true });
+        const response = await axios.post(`${url}/api/user/takeappointment`, { doctorId, date_time: `${format(date,'yyyy-MM-dd')} ${time?.displayTime}`, date, time:time.isoTime, fee, reason, paymentWay }, { withCredentials: true });
         if (response.data.url) { //for stripe payment
             window.location = response.data.url
         }

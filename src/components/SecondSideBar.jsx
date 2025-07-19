@@ -4,6 +4,8 @@ import getDirection from './Nav/Directions';
 import Logo from '../components/Logo'
 import { ModeToggle } from "./dark-light-button";
 // this side bar for admin and doctors roles
+import { memo } from 'react';
+
 const SecondSideBar = ({ showSideBar }) => {
     const directions = getDirection();
     return (
@@ -42,4 +44,4 @@ const SecondSideBar = ({ showSideBar }) => {
     )
 }
 
-export default SecondSideBar
+export default memo(SecondSideBar)

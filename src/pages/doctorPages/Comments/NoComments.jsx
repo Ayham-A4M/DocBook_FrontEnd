@@ -1,4 +1,5 @@
 import commentSvg from '../../../assets/comment.svg';
+import { memo } from 'react';
 
 const NoComments = () => {
     return (
@@ -11,4 +12,4 @@ const NoComments = () => {
     )
 }
 
-export default NoComments
+export default memo(NoComments)

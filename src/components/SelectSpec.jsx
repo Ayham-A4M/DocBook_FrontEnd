@@ -7,6 +7,7 @@ import {
   SelectGroup,
   SelectLabel
 } from "@/components/ui/select"
+import { memo } from 'react';
 
 const SelectSpec = ({setValue}) => {
 
@@ -30,4 +31,4 @@ const SelectSpec = ({setValue}) => {
     )
 }
 
-export default SelectSpec
+export default memo(SelectSpec);

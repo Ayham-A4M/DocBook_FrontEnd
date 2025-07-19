@@ -57,7 +57,7 @@ const Login = ({ setShowSignUp }) => {
     };
 
     return (
-        <Card className="relative w-full rounded-l-[6px] rounded-r-[0px] md:rounded-r-[0px]  justify-center min-h-[600px]">
+        <Card className="relative w-full rounded-l-[6px] rounded-r-[6px] md:rounded-r-[0px]  justify-center min-h-[600px]">
             <div className='absolute top-2 right-2'><Logo /></div>
 
             <CardHeader className="max-[776px]:px-2">

@@ -1,3 +1,4 @@
+import { memo } from "react"
 const StatsCard = ({ icon, status, borderColor, value }) => {
     return (
         <div className="flex justify-center">
@@ -17,4 +18,4 @@ const StatsCard = ({ icon, status, borderColor, value }) => {
     )
 }
 
-export default StatsCard
+export default memo(StatsCard)

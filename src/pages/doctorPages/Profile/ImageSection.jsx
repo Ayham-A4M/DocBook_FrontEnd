@@ -1,5 +1,5 @@
 
-
+import { memo } from "react";
 import { useState } from "react";
 import {FaEdit} from 'react-icons/fa'
 const ImageSection = ({ image, newImage, setNewImage,isEditing }) => {
@@ -34,4 +34,4 @@ const ImageSection = ({ image, newImage, setNewImage,isEditing }) => {
     )
 }
 
-export default ImageSection
+export default memo(ImageSection)

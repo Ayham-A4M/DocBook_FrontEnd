@@ -1,7 +1,7 @@
 import { marked } from 'marked';
-import { FaUserMd } from 'react-icons/fa';
 import { RiRobot2Line } from "react-icons/ri";
 import { CiUser } from "react-icons/ci";
+import { memo } from "react"
 const Message = ({ msg }) => {
     marked.setOptions({
         breaks: true,
@@ -35,4 +35,4 @@ const Message = ({ msg }) => {
     )
 }
 
-export default Message
+export default memo(Message)

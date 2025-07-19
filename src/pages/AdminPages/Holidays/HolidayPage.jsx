@@ -7,7 +7,7 @@ import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import { FaCalendarDays } from "react-icons/fa6";
 
-import { format } from "date-fns";
+import { isBefore, isToday } from "date-fns";
 import toast from "react-hot-toast";
 import handleCreateHoliday from "./handler/handleCreateHoliday";
 import useAxios from '../../../hooks/useAxios';
@@ -21,9 +21,11 @@ const HolidayPage = () => {
   const [holidays, setHolidays] = useState(null);
 
   const { data, err, loading } = useAxios(`/api/public/holidays/?year=${year}`, false);
+  
   useEffect(() => {
     setHolidays(data);
   }, [data])
+
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setNewHoliday({ ...newHoliday, [name]: value });
@@ -31,18 +33,15 @@ const HolidayPage = () => {
 
   const addHoliday = async (e) => {
     e.preventDefault();
-    if (format(newHoliday.date, 'yyyy-MM-dd') < format(new Date(), "yyyy-MM-dd")) {
-      return toast.error('the date you picked in past');
-    } else if (format(newHoliday.date, 'yyyy-MM-dd') === format(new Date(), "yyyy-MM-dd")) {
+    if (isToday(newHoliday.date)) {
       return toast.error('you can just picked date in future')
     }
-    const newholiday = {
-      date: format(newHoliday.date, "yyyy-MM-dd"),
-      reason: newHoliday.reason
+    else if (isBefore(newHoliday.date, new Date())) {
+      return toast.error('the date you picked in past');
     }
-    const response = await handleCreateHoliday(newholiday, setIsLoading);
+    const response = await handleCreateHoliday(newHoliday, setIsLoading);
     if (response) {
-      setHolidays(prev => [...prev, { ...newholiday, _id: `${150 * Math.random()}` }])
+      setHolidays(prev => [...prev, { ...newHoliday, _id: `${150 * Math.random()}` }])
     }
   };
 

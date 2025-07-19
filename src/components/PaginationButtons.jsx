@@ -1,5 +1,7 @@
 import { FaChevronCircleRight } from "react-icons/fa";
 import { FaChevronCircleLeft } from "react-icons/fa";
+import { memo } from 'react';
+
 const PaginationButtons = ({ page, setPage, limit }) => {
     const handleDecreasePage = () => {
         if (page > 1) {
@@ -36,4 +38,4 @@ const PaginationButtons = ({ page, setPage, limit }) => {
     )
 }
 
-export default PaginationButtons
+export default memo(PaginationButtons)

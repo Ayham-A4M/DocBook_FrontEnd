@@ -2,6 +2,7 @@ import Loader2 from "../../../components/Loader2"
 import HolidayCard from "../../../components/HolidayCard"
 import handleDeleteHoliday from "./handler/handleDeleteHoliday";
 import { useCallback } from "react";
+import { memo } from "react"
 const HolidaysCards = ({ holidays, year, loading, setHolidays }) => {
     const deleteHoliday = useCallback(async (id) => {
         const response = await handleDeleteHoliday(id);
@@ -47,4 +48,4 @@ const HolidaysCards = ({ holidays, year, loading, setHolidays }) => {
     )
 }
 
-export default HolidaysCards
+export default memo(HolidaysCards);

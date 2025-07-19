@@ -1,5 +1,5 @@
 
-
+import { memo } from "react"
 const MainTitle = ({ mainTitle, subTitle }) => {
     return (
       
@@ -17,4 +17,4 @@ const MainTitle = ({ mainTitle, subTitle }) => {
 
 }
 
-export default MainTitle
+export default memo(MainTitle)

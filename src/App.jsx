@@ -58,48 +58,47 @@ const App = () => {
               {/* User Routes */}
               <Route element={<MainLayout />}>
                 <Route path="/" element={<Home />} />
-                <Route element={<PortectRoute role={'user'} />}>
-                  <Route path="/about" element={<About />} />
-                  <Route path="/contact" element={<ContactUs />} />
-                  <Route path="/doctors" element={<Doctors />} />
-                  <Route path="/doctorpage" element={<DoctorPage />} />
-                  <Route path="/myappointments" element={<MyAppointments />} />
-
-                </Route>
+                {/* <Route element={<PortectRoute role={'user'} />}> */}
+                <Route path="/about" element={<About />} />
+                <Route path="/contact" element={<ContactUs />} />
+                <Route path="/doctors" element={<Doctors />} />
+                <Route path="/doctorpage" element={<DoctorPage />} />
+                <Route path="/myappointments" element={<MyAppointments />} />
                 <Route path="/report" element={<ReportPage />} />
               </Route>
-              <Route element={<PortectRoute role={'user'} />}>
+              {/* </Route> */}
+              {/* <Route element={<PortectRoute role={'user'} />}> */}
                 <Route path="/AIChat" element={<AIChat />} />
-              </Route>
+              {/* </Route> */}
               {/* User Routes */}
 
 
               {/* doctor routes */}
               {/* <Route element={<PortectRoute role={'doctor'} />}> */}
-                <Route element={<DoctorLayout />}>
-                  <Route path="/doctorappointments" element={<DoctorAppointments />} />
-                  <Route path="/reports" element={<Reports />} />
-                  <Route path="/comments" element={<Comments />} />
-                  <Route path="/doctorProfile" element={<DoctorProfile />} />
-                  <Route path="/reportPage" element={<ReportPage />} />
-                  <Route path="/upcomingAppointments" element={<UpComingAppointments />} />
-                </Route>
+              <Route element={<DoctorLayout />}>
+                <Route path="/doctorappointments" element={<DoctorAppointments />} />
+                <Route path="/reports" element={<Reports />} />
+                <Route path="/comments" element={<Comments />} />
+                <Route path="/doctorProfile" element={<DoctorProfile />} />
+                <Route path="/reportPage" element={<ReportPage />} />
+                <Route path="/upcomingAppointments" element={<UpComingAppointments />} />
+              </Route>
               {/* </Route> */}
               {/* doctor routes */}
 
               {/* admin routes */}
 
-              <Route element={<PortectRoute role={'admin'} />}>
-                <Route element={<DoctorLayout />}>
+              {/* <Route element={<PortectRoute role={'admin'} />}> */}
+              <Route element={<DoctorLayout />}>
 
-                  <Route path="/statistics" element={<AdminDashboard />} />
-                  <Route path="/allDoctors" element={<AllDoctors />} />
-                  <Route path="/newdoctor" element={<NewDoctor />} />
-                  <Route path="/allUsers" element={<AllUsers />} />
-                  <Route path="/holidays" element={<HolidayPage />} />
-                </Route>
-
+                <Route path="/statistics" element={<AdminDashboard />} />
+                <Route path="/allDoctors" element={<AllDoctors />} />
+                <Route path="/newdoctor" element={<NewDoctor />} />
+                <Route path="/allUsers" element={<AllUsers />} />
+                <Route path="/holidays" element={<HolidayPage />} />
               </Route>
+
+              {/* </Route> */}
 
 
 
