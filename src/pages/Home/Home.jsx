@@ -1,6 +1,5 @@
 import Hero from "./Hero"
 import Speciality from "./Speciality"
-// import DoctorCard from "../../components/DoctorCard"
 import Stats from "./Stats"
 import Banner from "./Banner"
 import useUser from "../../hooks/useUser"

@@ -18,13 +18,19 @@ const Speciality = () => {
     return (
         <div className="w-full flex justify-center">
             <div className="flex flex-col items-center text-slate-800 dark:text-primary  gap-5">
-                <h1 className="text-3xl  dark:text-primary font-extrabold text-[var(--main-blue)]">Find by Speciality</h1>
-                <span className="text-center w-5/10 font-light ">Lorem ipsum dolor sit amet consectetur adipisicing elit. Eius corrupti voluptates debitis eligendi possimus. Non ea odit consectetur esse beatae </span>
+                <div className="text-center mb-10" data-aos="fade-up" data-aos-duration="600">
+                    <h2 className="text-5xl font-bold text-[var(--main-blue)] mb-6">
+                       Match with Experts
+                    </h2>
+                    <p className="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
+                        Find the best doctors, professionals, or services in your exact field of need because the right expertise makes all the difference.
+                    </p>
+                </div>
                 <div className="grid md:grid-cols-6 gap-3.5 grid-cols-2">
                     {
                         specialityArray.map((ele, i) => (
                             <div className="w-full flex items-center justify-center" key={i}>
-                                <div data-aos-duration="500" data-aos="fade-left" data-aos-delay={`${i*100}`}>
+                                <div data-aos-duration="500" data-aos="fade-left" data-aos-delay={`${i * 100}`}>
                                     <SpecialityCard pic={ele.pic} title={ele.title} />
                                 </div>
                             </div>
