@@ -14,7 +14,7 @@ const Hero = () => {
       <div className="container mx-auto px-6 flex flex-col md:flex-row items-center">
         {/* Text Content */}
         <div className="md:w-1/2 text-center md:text-left z-10">
-          <h1 className="text-4xl md:text-6xl font-extrabold mb-4 leading-tight tracking-tight" data-aos="fade" data-aos-duration="600">
+          <h1 className="max-[991px]:text-[40px]   text-6xl font-extrabold mb-4 leading-tight tracking-tight" data-aos="fade" data-aos-duration="600">
             Empower Your Health Journey
           </h1>
           <p className="text-lg md:text-xl mb-8 max-w-md mx-auto md:mx-0 text-gray-600 dark:text-primary" data-aos="fade" data-aos-duration="600" data-aos-delay="200">

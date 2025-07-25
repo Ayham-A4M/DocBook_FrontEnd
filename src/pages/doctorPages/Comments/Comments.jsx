@@ -6,6 +6,7 @@ import useGetComments from '../../../hooks/doctors/useGetComments'
 import PaginationButtons from '../../../components/PaginationButtons'
 import LevelCard from "./LevelCard";
 import NoComments from "./NoComments";
+import  Loader2  from "../../../components/Loader2";
 const Comments = () => {
 
     const { comments, rate, limit, totlaComments, page, setPage, err, loading } = useGetComments();
@@ -15,7 +16,7 @@ const Comments = () => {
             <div className="space-y-8">
                 <div className="grid md:grid-cols-3 grid-cols-1 gap-4">
 
-                    <StatsCard icon={<FaCommentDots className="text-[25px] text-blue-500" />} status={'Total Comments'} value={totlaComments} borderColor={'border-blue-500'} />
+                    <StatsCard icon={<FaCommentDots className="text-[25px] text-blue-500" />} status={'Total Comments'} value={totlaComments || 0} borderColor={'border-blue-500'} />
 
 
                     <StatsCard icon={<FaRankingStar className="text-[25px] text-yellow-300" />} status={'Your Rate'} value={rate || 0} borderColor={'border-yellow-300'} />
@@ -25,6 +26,11 @@ const Comments = () => {
                 </div>
                 <div className="py-5 px-2 rounded-lg bg-card shadow-xl">
                     {
+                        loading ?
+                        <div className="w-full flex items-center justify-center py-6">
+                            <Loader2/>
+                        </div>
+                        :
                         comments?.length > 0 ?
 
                             <>

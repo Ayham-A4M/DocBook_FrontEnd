@@ -10,7 +10,7 @@ const DoctorAppointments = () => {
 
     return (
         <div className="mx-auto max-w-7xl p-1 md:p-8">
-            <MainTitle mainTitle={'Today\'s Appointments'} subTitle={'manages today appointment with all ease'} />
+            <MainTitle mainTitle={'Today\'s Appointments'} subTitle={'manages today appointment with all ease'}  />
 
 
             {loading ? (
@@ -28,7 +28,7 @@ const DoctorAppointments = () => {
                 </div>
             ) : (
                 <div className="text-center py-12 bg-card rounded-xl shadow-sm border border-gray-100">
-                    <FaCalendarAlt className="mx-auto text-5xl text-blue-600 dark:text-[var(--main-blue)] mb-4" />
+                    <FaCalendarAlt className="mx-auto text-5xl text-[var(--main-blue)]  mb-4" />
                     <p className="text-gray-500 text-lg dark:text-popover-foreground">No appointments scheduled for today</p>
                 </div>
             )}

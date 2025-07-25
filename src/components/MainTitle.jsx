@@ -1,6 +1,6 @@
 
 import { memo } from "react"
-const MainTitle = ({ mainTitle, subTitle }) => {
+const MainTitle = ({ mainTitle, subTitle,titleColor }) => {
     return (
       
         <div className="md:py-4 pt-2 pb-4 flex flex-col items-start ">

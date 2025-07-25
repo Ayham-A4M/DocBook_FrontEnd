@@ -1,17 +1,20 @@
 import TableHead from './TableHead';
 import TableRow from './TableRow';
-import useGetMyAppointments from '../../hooks/useGetMyAppointments';
+import useGetMyAppointments from '../../../hooks/useGetMyAppointments'
 import FilterButton from './FilterButton';
-import PaginationButtons from '../../components/PaginationButtons';
-import Loader2 from '../../components/Loader2'
-import StatsCard from '../../components/StatsCard';
-import MainTitle from '../../components/MainTitle'
-import { memo } from "react"
+import PaginationButtons from '../../../components/PaginationButtons';
+import Loader2 from '../../../components/Loader2'
+import StatsCard from '../../../components/StatsCard';
+import MainTitle from '../../../components/MainTitle'
+import { memo, useEffect } from "react"
 const MyAppointments = () => {
-    
 
-    const { appointments, setAppointments, appointmentStats, setAppointmentsType, page, setPage, limit, sendingReq } = useGetMyAppointments();
 
+    const { appointments, setAppointments, appointmentStats, setAppointmentsType, page, setPage, limit, loading } = useGetMyAppointments();
+    useEffect(() => {
+        console.log('loading',loading)
+
+    }, [loading])
     return (
 
         <div className="py-3  mb-8  mx-auto">
@@ -45,7 +48,8 @@ const MyAppointments = () => {
                                 <TableHead />
                                 <tbody className=" w-full divide-y divide-gray-200">
                                     {
-                                        sendingReq ?
+                                        loading ?
+
                                             <tr>
                                                 <td colSpan={7} className="py-6 w-full">
                                                     <div className="flex justify-center items-center h-full">

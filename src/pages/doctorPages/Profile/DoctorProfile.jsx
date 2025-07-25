@@ -20,7 +20,7 @@ const DoctorProfile = () => {
     const [isEditing, setIsEditing] = useState(false);
     const [editInformation, setEditInformation] = useState(null);
     const [profile, setProfile] = useState(null);
-    const { data, err, loading } = useAxios('/api/doctor/myProfile', true);
+    const { data, err, loading } = useAxios('/api/doctor/myProfile');
     const [newImage, setNewImage] = useState(null)
     useEffect(() => {
         setProfile(data);

@@ -10,11 +10,11 @@ const SideBar = ({ showSideBar, setShowSideBar }) => {
         <>
             {
                 showSideBar &&
-                <div className="w-full fixed h-[calc(100vh-72px)] top-[72px] z-30 bg-[#00000039] backdrop:blur-xl ">
+                <div className="w-full fixed h-[calc(100vh-72px)] top-[72px] z-30 bg-[#00000039] backdrop:blur-xl max-[991px]:block hidden ">
                 </div>
             }
 
-            <div className={`fixed z-40 dark:bg-[#192538] duration-300 overflow-hidden   w-[80%] h-[calc(100vh-72px)] ${showSideBar ? 'right-0' : 'right-[-150%]'} bg-[#e2e9f2] top-[72px]`} >
+            <div className={`fixed z-40 dark:bg-[#192538] duration-300 overflow-hidden max-[991px]:block hidden   w-[80%] h-[calc(100vh-72px)] ${showSideBar ? 'right-0' : 'right-[-150%]'} bg-[#e2e9f2] top-[72px]`} >
                 <div className="relative  flex flex-col px-2.5 py-4  gap-[20px] w-full">
 
                     <div className="absolute inset-0 ">

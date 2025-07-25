@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { FaPaperPlane } from 'react-icons/fa';
 import { format } from 'date-fns'
-import Nav from '../../components/Nav/Nav';
+import Nav from '../../../components/Nav/Nav';
 import handleSendMessage from './handler/handleSendMessage';
 import Message from './Message';
 import { RiRobot2Line } from "react-icons/ri";
@@ -18,7 +18,7 @@ const AIChat = () => {
     ||
     [
       {
-        text: 'Welcome to MediBot! I’m here to assist with your health queries. What’s on your mind today?',
+        text: 'Welcome to VitaBot! I’m here to assist with your health queries. What’s on your mind today?',
         sender: 'AI',
         timestamp: getTimeNow(),
       },

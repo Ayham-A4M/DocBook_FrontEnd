@@ -4,7 +4,6 @@ import handleCancelAppointment from './handler/handleCancelAppointment';
 import {
     Card,
 } from "@/components/ui/card"
-import timeFormat from '../../../helper/timeFormat'
 import { Button } from '@/components/ui/button'
 import Report from './Report';
 import { memo } from 'react';
@@ -41,11 +40,11 @@ const AppointmentCard = ({ appointment, appointments, setAppointments }) => {
 
             <div className="space-y-3 text-gray-600 dark:text-slate-300">
                 <div className="flex items-center ">
-                    <FaClock className="text-blue-600 mr-3" />
-                    <span>{timeFormat(appointment.time)}</span>
+                    <FaClock className="text-[var(--main-blue)] mr-3" />
+                    <span>{appointment.time}</span>
                 </div>
                 <div className="flex items-center">
-                    <FaNotesMedical className="text-blue-600 mr-3" />
+                    <FaNotesMedical className="text-[var(--main-blue)] mr-3" />
                     <span>{appointment.reason}</span>
                 </div>
             </div>

@@ -1,5 +1,5 @@
-import SearchInput from '../../components/SearchInput';
-import SelectSpec from '../../components/SelectSpec';
+import SearchInput from '../../../components/SearchInput';
+import SelectSpec from '../../../components/SelectSpec';
 import { memo } from 'react';
 const FilterDoctors = ({ setSpecialize, setSearchByName, searchByName }) => {
 

@@ -1,7 +1,5 @@
-import React from 'react'
 import Logo from '../../../components/Logo'
 import healthCareSymbol from '../../../assets/healthCare-symbol.svg'
-import dateFormat from '../../../helper/dateFormat'
 const ReportInformation = ({ ReportInformation }) => {
     return (
         <>
@@ -10,7 +8,7 @@ const ReportInformation = ({ ReportInformation }) => {
                 <div className="w-full h-full space-y-6 pt-6 px-2">
                     <div className="flex justify-between items-center">
                         <h1>Dr.{ReportInformation.doctorName}</h1>
-                        <i className="font-light ">{dateFormat(ReportInformation.date)}</i>
+                        <i className="font-light ">{ReportInformation.date}</i>
                     </div>
                     <div className="flex flex-col gap-3 font-light">
                         <span>Patient Name : {ReportInformation.patientName}</span>

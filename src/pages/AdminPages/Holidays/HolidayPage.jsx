@@ -1,13 +1,13 @@
 
 import { TbCalendarQuestion } from "react-icons/tb";
-import { FaCalendarAlt, FaPlus, FaTrash } from 'react-icons/fa';
+import { FaCalendarAlt, FaPlus } from 'react-icons/fa';
 import MainTitle from '../../../components/MainTitle'
 import { useEffect, useState } from 'react';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import { FaCalendarDays } from "react-icons/fa6";
 
-import { isBefore, isToday } from "date-fns";
+import { isBefore, isToday, format } from "date-fns";
 import toast from "react-hot-toast";
 import handleCreateHoliday from "./handler/handleCreateHoliday";
 import useAxios from '../../../hooks/useAxios';
@@ -18,10 +18,10 @@ const HolidayPage = () => {
   const [newHoliday, setNewHoliday] = useState({ date: '', reason: '' });
   const [isLoading, setIsLoading] = useState(false);
   const [year, setYear] = useState('2025');
-  const [holidays, setHolidays] = useState(null);
+  const [holidays, setHolidays] = useState([]);
 
-  const { data, err, loading } = useAxios(`/api/public/holidays/?year=${year}`, false);
-  
+  const { data, err, loading } = useAxios(`/api/public/holidays/?year=${year}`);
+
   useEffect(() => {
     setHolidays(data);
   }, [data])
@@ -41,7 +41,8 @@ const HolidayPage = () => {
     }
     const response = await handleCreateHoliday(newHoliday, setIsLoading);
     if (response) {
-      setHolidays(prev => [...prev, { ...newHoliday, _id: `${150 * Math.random()}` }])
+      const Holidays=holidays?.length ? [...holidays,{ ...newHoliday, _id: `${150 * Math.random()}` }] : [{ ...newHoliday, _id: `${150 * Math.random()}` }];
+      setHolidays(Holidays);
     }
   };
 
@@ -70,7 +71,7 @@ const HolidayPage = () => {
               <DatePicker
                 className='inputStyle'
                 selected={newHoliday.date}
-                onChange={(date) => setNewHoliday(prev => ({ ...prev, date: date }))}
+                onChange={(date) => setNewHoliday(prev => ({ ...prev, date: format(date, 'yyyy-MM-dd') }))}
                 placeholderText="Select a holiday date"
               />
             </div>
@@ -102,18 +103,13 @@ const HolidayPage = () => {
             <button
               disabled={isLoading}
               type="submit"
-              className="w-full sm:w-auto flex items-center justify-center px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors"
+              className={`w-full sm:w-auto flex items-center justify-center px-4 py-2 ${isLoading?'bg-[#464475] cursor-not-allowed':'bg-blue-600 cursor-pointer'}  text-white rounded-md  transition-colors`}
             >
-              {
-                isLoading ?
 
-                  <span>•••••••••••••••</span>
-                  :
-                  <>
-                    <FaPlus className="mr-2" /> Add Holiday
-                  </>
-              }
+              <FaPlus className="mr-2" /> Add Holiday
+            
             </button>
+
           </div>
         </form>
         {/* filter Cards with year */}

@@ -19,17 +19,13 @@ import * as yup from 'yup'
 import FormErrorMessage from '../../components/FormErrorMessage';
 
 const SingUp = ({ setShowSignUp }) => {
-    const [fullName, setFullName] = useState('');
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
-    const [phoneNumber, setPhoneNumber] = useState('');
-    const [age, setAge] = useState(0);
+    const [loading, setLoading] = useState(false);
     const registerSchema = yup.object().shape({
         fullName: yup.string().trim().min(3).max(30).required(),
         email: yup.string().email().required(),
         password: yup.string().min(8).max(20).required(),
         phoneNumber: yup.string().required("phone number is required"),
-        age: yup.number().integer().min(18,"minimum age is 18").max(150,"maximum age is 150").required(),
+        age: yup.number().integer().min(18, "minimum age is 18").max(150, "maximum age is 150").required(),
     });
     const { control, handleSubmit, formState: { errors } } = useForm({
         resolver: yupResolver(registerSchema),
@@ -43,8 +39,8 @@ const SingUp = ({ setShowSignUp }) => {
     });
 
 
-    const submitSignUp = (data) => {   
-        handleSignUpProcess(data.fullName, data.email, data.password, data.phoneNumber, data.age);
+    const submitSignUp = (data) => {
+        handleSignUpProcess(data.fullName, data.email, data.password, data.phoneNumber, data.age,setLoading);
     }
     return (
         <Card className="relative  w-full rounded-l-[6px] md:rounded-r-[0px] rounded-r-[6px] justify-center min-h-[600px]">
@@ -69,7 +65,7 @@ const SingUp = ({ setShowSignUp }) => {
                             name='fullName'
                             control={control}
                             render={({ field }) => (
-                                <Input id="fullNameField"  type="text" {...field} className={`py-6 ${errors.fullName?'border-red-500':''}    `} placeholder="John Doe" />
+                                <Input id="fullNameField" type="text" {...field} className={`py-6 ${errors.fullName ? 'border-red-500' : ''}    `} placeholder="John Doe" />
                             )}
                         />
 
@@ -86,7 +82,7 @@ const SingUp = ({ setShowSignUp }) => {
                             name='email'
                             control={control}
                             render={({ field }) => (
-                                <Input id="emailField" type="email" {...field} className={`py-6 ${errors.email?'border-red-500':''}`} placeholder="johndoe@gmail.com" />
+                                <Input id="emailField" type="email" {...field} className={`py-6 ${errors.email ? 'border-red-500' : ''}`} placeholder="johndoe@gmail.com" />
 
                             )}
                         />
@@ -101,7 +97,7 @@ const SingUp = ({ setShowSignUp }) => {
                                 render={({ field }) => (
                                     <PhoneInput
                                         {...field}
-                                        inputStyle={{ width: '100%', borderColor:`${errors.phoneNumber?'red':'gray'}`,paddingTop: '24px', paddingBottom: '24px' }}
+                                        inputStyle={{ width: '100%', borderColor: `${errors.phoneNumber ? 'red' : 'gray'}`, paddingTop: '24px', paddingBottom: '24px' }}
                                         country={'sy'}
 
                                     />
@@ -120,7 +116,7 @@ const SingUp = ({ setShowSignUp }) => {
                                 name='age'
                                 control={control}
                                 render={({ field }) => (
-                                    <Input id="age" type="number" {...field} className={`py-6 ${errors.age?'border-red-500':''}`} placeholder="your age" />
+                                    <Input id="age" type="number" {...field} className={`py-6 ${errors.age ? 'border-red-500' : ''}`} placeholder="your age" />
 
                                 )}
                             />
@@ -142,13 +138,21 @@ const SingUp = ({ setShowSignUp }) => {
                             name='password'
                             control={control}
                             render={({ field }) => (
-                                <Input id="passField" type="password" {...field} className={`py-6 ${errors.email?'border-red-500':''}`} placeholder="••••••••" />
+                                <Input id="passField" type="password" {...field} className={`py-6 ${errors.email ? 'border-red-500' : ''}`} placeholder="••••••••" />
                             )}
                         />
                     </div>
 
                     {/* Submit Button */}
-                    <Button type="submit" className="w-full bg-[#2c4ca2] hover:bg-[#3457b7] py-6 cursor-pointer">Create Account</Button>
+                    <Button type="submit" disabled={loading} className="w-full bg-[#2c4ca2] hover:bg-[#3457b7] py-6 cursor-pointer">
+                        {
+                            loading ?
+                                '••••'
+                                :
+                                ' Create Account'
+                        }
+
+                    </Button>
 
                 </form>
             </CardContent>

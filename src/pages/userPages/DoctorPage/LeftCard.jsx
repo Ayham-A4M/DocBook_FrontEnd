@@ -27,7 +27,7 @@ const LeftCard = ({ image, fullName, specialization, rate, treatmentsNumber, pho
         <div className="bg-card rounded-lg shadow-md p-6 ">
             <div className="flex flex-col items-center">
                 <img
-                    src={`http://localhost:8000${image}`}
+                    src={image}
                     alt={fullName}
                     className="w-48 h-48 rounded-full object-cover border-4 border-[var(--main-blue)] mb-4"
                 />

@@ -1,11 +1,7 @@
-import axios from "axios"
 import toast from "react-hot-toast"
-import useGetEnviromentVariable from '../../../../hooks/useGetEnviromentVariable'
-
+import axiosInstance from "../../../../helper/axiosInterceptor"
 const deletDoctor = async (doctorId) => {
-    const { url } = useGetEnviromentVariable();
-    const response = await axios.post(`${url}/api/admin/deleteDoctor`, { doctorId }, { withCredentials: true });
-    console.log(response)
+    const response = await axiosInstance.post(`/api/admin/deleteDoctor`, { doctorId });
     return response.data.msg;
 }
 

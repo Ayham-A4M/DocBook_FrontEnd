@@ -1,11 +1,9 @@
-import axios from "axios"
-import useGetEnviromentVariable from "../../../../hooks/useGetEnviromentVariable"
+import axiosInstance from "../../../../helper/axiosInterceptor";
 import toast from "react-hot-toast";
 
 const handleCancelAppointment = async (appointmentId) => {
-    const { url } = useGetEnviromentVariable();
     try {
-        const response = await axios.post(`${url}/api/doctor/cancelAppointment`, { appointmentId }, { withCredentials: true });
+        const response = await axiosInstance.post(`/api/doctor/cancelAppointment`, { appointmentId });
         if (response.status === 200) {
             toast.success(response.data.msg);
             return true;

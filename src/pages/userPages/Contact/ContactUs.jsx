@@ -1,5 +1,5 @@
 
-import { FiMail, FiPhone, FiMapPin, FiSend, FiArrowRight } from 'react-icons/fi';
+import { FiMail, FiPhone, FiMapPin, FiSend } from 'react-icons/fi';
 
 const ContactUs = () => {
     const contact = [

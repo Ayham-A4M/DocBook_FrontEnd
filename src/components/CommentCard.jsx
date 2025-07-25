@@ -1,7 +1,6 @@
 
 import { FaUser, FaStar, FaStarHalfAlt, FaHeartbeat } from 'react-icons/fa';
 import { FaUserDoctor } from "react-icons/fa6";
-import dateFormat from '../helper/dateFormat'
 import { memo } from 'react';
 const CommentCard = ({ name, feeling, rating, opinion, date, doctorName }) => {
     // Convert rating to an array for rendering stars
@@ -32,7 +31,7 @@ const CommentCard = ({ name, feeling, rating, opinion, date, doctorName }) => {
             <div className="absolute top-2 left-2">
                 <FaHeartbeat className="text-[var(--main-blue)] dark:text-blue-600 text-2xl opacity-80" />
             </div>
-            <i className='absolute bottom-[5px] right-[5px] text-[10px] text-slate-800 dark:text-slate-100'>{dateFormat(date)}</i>
+            <i className='absolute bottom-[5px] right-[5px] text-[10px] text-slate-800 dark:text-slate-100'>{date}</i>
 
             {/* Card Content */}
             <div className="relative z-10">

@@ -67,7 +67,7 @@ const preparePieChartData = (chartData) => {
 
 
 const AdminDashboard = () => {
-    const { data, err, loading } = useAxios('/api/admin/dashboard', true);
+    const { data, err, loading } = useAxios('/api/admin/dashboard');
     const getPercentage = (percent) => (
         <span className='flex items-center justify-between w-full'>
             {`${percent}%`}

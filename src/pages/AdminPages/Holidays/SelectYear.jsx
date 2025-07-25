@@ -7,7 +7,6 @@ import {
     SelectGroup,
     SelectLabel
 } from "@/components/ui/select"
-import {  subYears, startOfYear } from "date-fns";
 import { memo } from "react"
 const SelectYear = ({ setYear }) => {
 
@@ -24,10 +23,7 @@ const SelectYear = ({ setYear }) => {
                         <SelectLabel>Holidays Year</SelectLabel>
                         {
                             [...Array(5)].map((e, i) => (
-                                // <SelectItem value={`${thisYear - i}`} key={i}>{thisYear - i}</SelectItem>
-                                
-                                <SelectItem value={`${startOfYear(subYears(new Date(),i))}`} key={i} className="text-popover-foreground">{thisYear - i}</SelectItem>
-
+                                <SelectItem value={`${thisYear - i}`} key={i}>{thisYear - i}</SelectItem>
                             ))
                         }
                     </SelectGroup>

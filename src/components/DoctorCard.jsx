@@ -46,7 +46,7 @@ const DoctorCard = ({ doctor }) => {
      
       <div className="relative border-b border-gray-300 dark:border-gray-700 flex items-center justify-center group-hover/parent:bg-blue-700/35 dark:group-hover/parent:bg-blue-500/10  duration-300 bg-transparent ">
         <img
-          src={`http://localhost:8000${doctor.image}`}
+          src={doctor.image}
           alt={doctor.fullName}
           className="w-full aspect-[16/9] object-contain rounded-t-2xl  "
         />

@@ -11,7 +11,7 @@ const DoctorLayout = () => {
     return (
         <div className={`${showSideBar ? 'h-screen overflow-y-hidden' : ''}`}>
             <div className="flex w-full relative">
-                <SecondSideBar showSideBar={showSideBar} />
+                <SecondSideBar showSideBar={showSideBar} setShowSideBar={setShowSideBar} />
 
 
 

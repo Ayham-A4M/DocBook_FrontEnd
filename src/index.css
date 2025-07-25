@@ -3,15 +3,12 @@
 
 @custom-variant dark (&:is(.dark *));
 
-* {
-    scroll-behavior: smooth;
-}
+
 
 :root,
 .light {
-    --main-white: #f4f4f4e4;
     --main-blue: rgb(59, 131, 246);
-    --main-green: rgb(52, 200, 136);
+    --doctor-color:#26a69a;
     --px: 1000px;
     --radius: 0.625rem;
     --background: oklch(1 0 0);
@@ -112,41 +109,80 @@
 /* Loaders */
 
 
-/* loader puls */
+/* loader 1 */
 
-/* From Uiverse.io by milley69 */
-.loading svg polyline {
-    fill: none;
-    stroke-width: 3;
-    stroke-linecap: round;
-    stroke-linejoin: round;
+/* From Uiverse.io by kerolos23 */
+.loader {
+    display: inline-block;
+    position: relative;
+    width: 80px;
+    height: 80px;
 }
 
-.loading svg polyline#back {
-    fill: none;
-    stroke: #4d5cff33;
+.loader div {
+    position: absolute;
+    top: 33px;
+    width: 13px;
+    height: 13px;
+    border-radius: 50%;
+    background: var(--main-blue);
+    animation-timing-function: cubic-bezier(0, 1, 1, 0);
 }
 
-.loading svg polyline#front {
-    fill: none;
-    stroke: #4287ff;
-    stroke-dasharray: 48, 144;
-    stroke-dashoffset: 192;
-    animation: dash_682 1.4s linear infinite;
+.loader div:nth-child(1) {
+    left: 8px;
+    animation: flip1 0.6s infinite;
 }
 
-@keyframes dash_682 {
-    72.5% {
-        opacity: 0;
+.loader div:nth-child(2) {
+    left: 8px;
+    animation: flip2 0.6s infinite;
+}
+
+.loader div:nth-child(3) {
+    left: 32px;
+    animation: flip2 0.6s infinite;
+}
+
+.loader div:nth-child(4) {
+    left: 56px;
+    animation: flip3 0.6s infinite;
+}
+
+@keyframes flip1 {
+    0% {
+        transform: scale(0);
     }
 
-    to {
-        stroke-dashoffset: 0;
+    100% {
+        transform: scale(1);
+    }
+}
+
+@keyframes flip3 {
+    0% {
+        transform: scale(1);
+    }
+
+    100% {
+        transform: scale(0);
+    }
+}
+
+@keyframes flip2 {
+    0% {
+        transform: translate(0, 0);
+    }
+
+    100% {
+        transform: translate(24px, 0);
     }
 }
 
 
-/* loader puls */
+
+
+/* loader 1 */
 
 
 
@@ -297,20 +333,7 @@
     animation-delay: 300ms;
 }
 
-.loaderPageLoader {
-    animation: bounce 1200ms ease-in-out infinite;
 
-}
-.loaderPageLoader:nth-child(2) {
-    animation-delay: 150ms;
-}
-
-.loaderPageLoader:nth-child(3) {
-    animation-delay: 300ms;
-}
-.loaderPageLoader:nth-child(4) {
-    animation-delay: 450ms;
-}
 /* Loaders */
 
 .flowIcon {
@@ -345,9 +368,7 @@
 
 
 
-/* animation */
 
-/* for loader1 */
 
 @theme inline {
     --radius-sm: calc(var(--radius) - 4px);
@@ -390,6 +411,7 @@
 .dark {
     /* --main-blue:#4682B4; */
     --main-blue: rgb(90, 146, 235);
+    --doctor-color:#00796b;
     --background: oklch(0.129 0.042 264.695);
     --foreground: oklch(0.984 0.003 247.858);
     --card: oklch(0.208 0.042 265.755);

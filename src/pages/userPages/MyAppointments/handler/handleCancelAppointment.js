@@ -1,13 +1,11 @@
-import axios from "axios"
+import axiosInstance from "../../../../helper/axiosInterceptor";
 import toast from "react-hot-toast"
-import useGetEnviromentVariable from "../../../hooks/useGetEnviromentVariable";
 const handleCancelAppointment = (id, setDisableCancelButton, setAppointments) => {
-    const { url } = useGetEnviromentVariable();
     if (!id) { toast.error('no specefic appointment'); return }
     const updateStatus = async () => {
         try {
             setDisableCancelButton(true);
-            const response = await axios.post(`${url}/api/user/cancelAppointment`, { appointmentId: id }, { withCredentials: true });
+            const response = await axiosInstance.post(`/api/user/cancelAppointment`, { appointmentId: id });
             if (response.status === 200) {
                 setAppointments(prev => (
                     prev?.map((e) => {

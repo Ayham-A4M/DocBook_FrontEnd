@@ -8,7 +8,7 @@ const useGetDoctors = () => {
     const [finalSearchByName, setFinalSearchByName] = useState('');
     const [specialize, setSpecialize] = useState(null);
     const [page,setPage]=useState(1);
-    const { data, err, loading } = useAxios(`/api/user/getdoctors/?fullName=${finalSearchByName}&page=${page || 1}&specialization=${specialize?specialize:'default'}`, true);
+    const { data, err, loading } = useAxios(`/api/user/getdoctors/?fullName=${finalSearchByName}&page=${page || 1}&specialization=${specialize?specialize:'default'}`);
     useEffect(() => {
         setFinalSearchByName(searchDebounce);
     }, [searchDebounce])

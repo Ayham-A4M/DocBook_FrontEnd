@@ -30,7 +30,7 @@ const useGetReports = () => {
         setReportStats({ completed, archived })
         return null;
     }
-    const { data, err, loading } = useAxios(`/api/doctor/getReports/?patientName=${finalSearch}&page=${page}&status=${statusDebounce}`, true);
+    const { data, err, loading } = useAxios(`/api/doctor/getReports/?patientName=${finalSearch}&page=${page}&status=${statusDebounce}`);
 
     useEffect(() => {
         if (data) {

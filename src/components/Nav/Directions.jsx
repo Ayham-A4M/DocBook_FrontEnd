@@ -12,7 +12,6 @@ import { CiBookmark } from "react-icons/ci";
 import { GoHome } from "react-icons/go";
 import { TbHeartbeat } from "react-icons/tb";
 import {BiCommentDots} from "react-icons/bi"
-// import { BiCommentDots } from "react-icons/bi";
 const getDirection = () => {
     const role = useGetRole();
 

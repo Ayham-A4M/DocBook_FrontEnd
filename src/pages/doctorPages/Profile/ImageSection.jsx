@@ -1,10 +1,11 @@
 
 import { memo } from "react";
 import { useState } from "react";
-import {FaEdit} from 'react-icons/fa'
-const ImageSection = ({ image, newImage, setNewImage,isEditing }) => {
+import { FaEdit } from 'react-icons/fa'
+const ImageSection = ({ image, newImage, setNewImage, isEditing }) => {
     const handlePhotoChange = (e) => {
         const file = e.target.files[0];
+        console.log(file);
         setNewImage(file)
         if (file) {
             const showImage = URL.createObjectURL(file);
@@ -15,7 +16,7 @@ const ImageSection = ({ image, newImage, setNewImage,isEditing }) => {
     return (
         <div className="relative">
             <img
-                src={`${newImage?`${editImage}`:`http://localhost:8000${image}`}`}
+                src={`${newImage ? `${editImage}` : image}`}
                 alt="Doctor"
                 className="w-32 h-32 rounded-full object-cover border-2 border-blue-100"
             />

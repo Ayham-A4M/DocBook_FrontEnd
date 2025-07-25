@@ -1,6 +1,6 @@
 
 import { FiCalendar, FiShield, FiArrowRight, FiClock, FiUserCheck, FiHeart, FiStar } from 'react-icons/fi';
-import pic from '../../assets/about-image.png'
+import pic from '../../../assets/about-image.png'
 const About = () => {
   const valueCards = [
     {

@@ -1,7 +1,6 @@
 import { Link } from 'react-router-dom'
 import { FaUserMd} from 'react-icons/fa';
-import handleCancelAppointment from './handler/handleCancelAppointment';
-import { format } from 'date-fns';
+import handleCancelAppointment from './handler/handleCancelAppointment'
 import { useState } from 'react';
 import { memo } from "react"
 const TableRow = ({ image, fee, dcotorName, specialization, date, time, status, id,setAppointments }) => {
@@ -11,7 +10,7 @@ const TableRow = ({ image, fee, dcotorName, specialization, date, time, status, 
             <td className="px-6 py-4 whitespace-nowrap">
                 <div className="flex items-center gap-3">
                     <img
-                        src={`http://localhost:8000${image}`}
+                        src={image}
                         alt={dcotorName}
                         className="w-10 h-10 rounded-full border-[1px] border-gray-600 dark:border-slate-200 object-cover"
                     />
@@ -27,10 +26,10 @@ const TableRow = ({ image, fee, dcotorName, specialization, date, time, status, 
                 <div className="text-gray-600 dark:text-slate-300">{specialization}</div>
             </td>
             <td className="px-6 py-4 whitespace-nowrap">
-                <div className="font-medium">{format(date, 'yyyy-MM-dd')}</div>
+                <div className="font-medium">{date}</div>
             </td>
             <td className='px-6 py-4 text-gray-500 dark:text-slate-400'>
-                {format(time, 'h:mm a')}
+                {time}
             </td>
             <td className="px-6 py-4 whitespace-nowrap">
                 <span>${fee}</span>

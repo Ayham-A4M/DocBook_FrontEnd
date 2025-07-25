@@ -10,17 +10,21 @@ import Loader2 from '../../../components/Loader2';
 import { useDebounce } from "use-debounce";
 import PaginationButtons from '../../../components/PaginationButtons';
 const AllUsers = () => {
+    const [users,setUsers]=useState(null);
     const [showDeletePopUp, setShowDeletePopUp] = useState(false);
     const [searchByName, setSearchByName] = useState('');
     const [searchByNameDebounce] = useDebounce(searchByName, 2000);
     const [finalSearch, setFinalSearch] = useState('');
     const [userId, setUserId] = useState(null);
     const [page, setPage] = useState(1);
-    const { data, err, loading } = useAxios(`/api/admin/users/?fullName=${finalSearch}&page=${page}`, true);
+    const { data, err, loading } = useAxios(`/api/admin/users/?fullName=${finalSearch}&page=${page}`);
     useEffect(() => {
         setFinalSearch(searchByNameDebounce);
         setPage(1);
     }, [searchByNameDebounce])
+    useEffect(()=>{
+        setUsers(data?.users);
+    },[data])
     return (
         <div className="w-full md:p-8 p-1">
             <MainTitle mainTitle={'Patient Records Dashboard'} subTitle={'Display core info and delete records when required'} />
@@ -53,7 +57,7 @@ const AllUsers = () => {
                                     </tr>
 
                                     :
-                                    <TableBody setShowDeletePopUp={setShowDeletePopUp} setUserId={setUserId} data={data} />
+                                    <TableBody setShowDeletePopUp={setShowDeletePopUp} setUserId={setUserId} data={users} />
                             }
                         </tbody>
 
@@ -64,7 +68,7 @@ const AllUsers = () => {
                 </div>
                 {
                     showDeletePopUp &&
-                    <DeletePopUp setShowDeletePopUp={setShowDeletePopUp} deleteFunction={handleDeleteUser} deleteId={userId} />
+                    <DeletePopUp setShowDeletePopUp={setShowDeletePopUp} deleteFunction={handleDeleteUser} deleteId={userId} setRecords={setUsers} />
                 }
             </div>
         </div>

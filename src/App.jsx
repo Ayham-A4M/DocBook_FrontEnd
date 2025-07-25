@@ -7,21 +7,22 @@ import LoadingPage from './components/LoadingPage'
 import Home from "./pages/Home/Home"
 import MainLayout from './layout/MainLayout'
 import DoctorLayout from './layout/DoctorLayout'
-import ContactUs from './pages/Contact/ContactUs'
 import UnAuthorized from './pages/UnAuthorized/UnAuthorized'
 import useGetUser from './hooks/useGetUser'
 import { ThemeProvider } from './components/theme-provider'
 import AOS from 'aos';
 import 'aos/dist/aos.css';
+import useScrollTop from './hooks/useScrollTop'
 
 // Lazy Components
 // userPages
-const Doctors = React.lazy(() => import('./pages/Doctors/Doctors'))
-const MyAppointments = React.lazy(() => import('./pages/MyAppointments/MyAppointments '))
-const DoctorPage = React.lazy(() => import('./pages/DoctorPage/DoctorPage'))
-const About = React.lazy(() => import('./pages/About/About'))
+const Doctors = React.lazy(() => import('./pages/userPages/Doctors/Doctors'))
+const MyAppointments = React.lazy(() => import('./pages/userPages/MyAppointments/MyAppointments '))
+const DoctorPage = React.lazy(() => import('./pages/userPages/DoctorPage/DoctorPage'))
+const About = React.lazy(() => import('./pages/userPages/About/About'))
+const ContactUs=React.lazy(()=>import('./pages/userPages/Contact/ContactUs'));
 const Login_SignUp = React.lazy(() => import('./pages/Login-SingUp/Login_SignUp'))
-const AIChat = React.lazy(() => import('./pages/AIChat/AIChat'))
+const AIChat = React.lazy(() => import('./pages/userPages/AIChat/AIChat'))
 const ReportPage = React.lazy(() => import('./pages/userPages/Report/ReportPage'));
 // doctorPages
 const DoctorAppointments = React.lazy(() => import('./pages/doctorPages/MangmentAppointments/DoctorAppointments'))
@@ -43,6 +44,7 @@ const SuccessfulAppointment = React.lazy(() => import('./pages/SuccessfulOperati
 
 export const User = createContext({});
 const App = () => {
+  useScrollTop();
   const { user, setUser, loadingUser } = useGetUser();
   useEffect(() => {
     AOS.init();
@@ -68,7 +70,7 @@ const App = () => {
               </Route>
               {/* </Route> */}
               {/* <Route element={<PortectRoute role={'user'} />}> */}
-                <Route path="/AIChat" element={<AIChat />} />
+              <Route path="/AIChat" element={<AIChat />} />
               {/* </Route> */}
               {/* User Routes */}
 

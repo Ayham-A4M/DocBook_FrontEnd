@@ -1,25 +1,21 @@
 import { NavLink } from "react-router-dom";
-import { IoIosLogIn } from "react-icons/io";
 import useUser from "../hooks/useUser";
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
-import useGetEnviromentVariable from "../hooks/useGetEnviromentVariable";
 import { IoLogOut } from "react-icons/io5";
 import { BsFillKeyFill } from "react-icons/bs";
 import toast from "react-hot-toast";
 import { Button } from '@/components/ui/button'
 import { memo } from 'react';
-
+import axiosInstance from "../helper/axiosInterceptor";
 const LoginORLogout = ({ theme }) => {
     const { user, setUser } = useUser();
     const navigate = useNavigate();
-    const { url } = useGetEnviromentVariable();
 
     const handleLogout = async () => {
         try {
-            const response = await axios.post(`${url}/api/auth/logout`, {}, { withCredentials: true });
+            const response = await axiosInstance.post('/api/auth/logout');
             if (response.status == 200) {
-                toast.success('logout done')
+                toast.success(response?.data?.msg ||'You are now logged out ')
                 setUser(null);
                 return navigate('/', { replace: true });
             }

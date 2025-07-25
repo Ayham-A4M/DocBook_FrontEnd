@@ -9,9 +9,9 @@ import 'react-datepicker/dist/react-datepicker.css';
 import { FaCalendarDays } from "react-icons/fa6";
 import { format } from "date-fns";
 const UpComingAppointments = () => {
-    const [date, setDate] = useState(new Date());
+    const [date, setDate] = useState(format(new Date(),'yyyy-MM-dd'));
     const [dateDebounce] = useDebounce(date, 2000);
-    const { data, loading, err } = useAxios(`/api/doctor/bookings/?date=${dateDebounce}`, true);
+    const { data, loading, err } = useAxios(`/api/doctor/bookings/?date=${dateDebounce}`);
     const isValidDay = (date) => (
         data?.workingDays?.includes(format(date, 'EEE').toLowerCase())
     )
@@ -29,7 +29,7 @@ const UpComingAppointments = () => {
                                 className='inputStyle'
                                 selected={date}
                                 filterDate={isValidDay}
-                                onChange={(date) => setDate(date)}
+                                onChange={(date) => setDate(format(date,'yyyy-MM-dd'))}
                                 placeholderText="select date"
                             />
                         </div>

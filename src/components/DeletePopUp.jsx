@@ -1,7 +1,7 @@
 import { memo } from 'react';
 import { FaExclamationTriangle, FaTimes, FaTrash } from "react-icons/fa";
 import { useState } from "react";
-const DeletePopUp = ({ setShowDeletePopUp, deleteFunction, deleteId }) => {
+const DeletePopUp = ({ setShowDeletePopUp, deleteFunction, deleteId, setRecords }) => {
     const [confirmationText, setConfirmationText] = useState("");
     const [isConfirmed, setIsConfirmed] = useState(false);
     const handleTextChange = (e) => {
@@ -10,9 +10,13 @@ const DeletePopUp = ({ setShowDeletePopUp, deleteFunction, deleteId }) => {
         setIsConfirmed(text.toUpperCase() === "DELETE");
     };
     const handleDeleteMethod = async () => {
-        const response = deleteFunction(deleteId);  // ites resolve with true or false and delete id for api
+        const response = deleteFunction(deleteId);  // ites resolve with true or false; and delete id for api
         if (response) {
+            if (setRecords) {
+                setRecords(prev => (prev?.filter(e => (e._id != deleteId))))
+            }
             setShowDeletePopUp(false);
+
         }
     }
     return (
@@ -22,7 +26,7 @@ const DeletePopUp = ({ setShowDeletePopUp, deleteFunction, deleteId }) => {
                 <div className="flex items-center justify-between p-4 border-b">
                     <div className="flex items-center space-x-2">
                         <FaExclamationTriangle className="text-yellow-500 text-xl" />
-                        <h3 className="text-lg font-semibold">Delete Action</h3>
+                        <h3 className="text-lg font-semibold text-black">Delete Action</h3>
                     </div>
                     <button
                         onClick={(e) => { e.preventDefault(); setShowDeletePopUp(false) }}
@@ -34,8 +38,8 @@ const DeletePopUp = ({ setShowDeletePopUp, deleteFunction, deleteId }) => {
 
                 {/* Body */}
                 <div className="p-6">
-                    <p className="mb-4">
-                        Are you sure you want to delete <span className="font-semibold">This Record</span>?
+                    <p className="mb-4 text-black">
+                        Are you sure you want to delete <span className="font-semibold text-black ">This Record</span>?
                     </p>
 
                     <div className="bg-yellow-50 border-l-4 border-yellow-400 p-4 mb-4">
@@ -61,7 +65,7 @@ const DeletePopUp = ({ setShowDeletePopUp, deleteFunction, deleteId }) => {
                             id="confirm-delete"
                             value={confirmationText}
                             onChange={handleTextChange}
-                            className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-red-500"
+                            className="w-full text-black px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-red-500"
                             placeholder="Type DELETE here"
                         />
                     </div>

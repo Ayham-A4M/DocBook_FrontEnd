@@ -4,9 +4,9 @@ const TableBody = ({ setShowDeletePopUp, setUserId, data }) => {
   return (
     <>
       {
-        data?.users?.length > 0
+        data?.length > 0
           ?
-          data.users.map((e) => (
+          data.map((e) => (
             <tr className="hover:bg-slate-100 dark:hover:bg-slate-800" key={e._id}>
               <td className="py-4 text-center">{e.fullName}</td>
               <td className="py-4 text-center">{e.email}</td>

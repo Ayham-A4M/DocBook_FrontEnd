@@ -1,10 +1,8 @@
-import axios from "axios"
-import useGetEnviromentVariable from "../../../../hooks/useGetEnviromentVariable"
 import toast from "react-hot-toast"
+import axiosInstance from "../../../../helper/axiosInterceptor"
 const editProfile = async (doctorId, docInformation) => {
     // we must use form data
-    const { url } = useGetEnviromentVariable()
-    const response = await axios.post(`${url}/api/admin/editDoctor/?doctorId=${doctorId}`, {docInformation}, { withCredentials: true });
+    const response = await axiosInstance.post(`api/admin/editDoctor/?doctorId=${doctorId}`, {docInformation});
     return response.data.msg
 }
 

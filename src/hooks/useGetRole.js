@@ -1,6 +1,6 @@
 import {useState } from "react"
 import useUser from "./useUser";
-import { useEffect,useLayoutEffect } from "react"
+import { useLayoutEffect } from "react"
 const useGetRole = () => {
     const [role,setRole]=useState(false);
     const {user,setUser}=useUser();

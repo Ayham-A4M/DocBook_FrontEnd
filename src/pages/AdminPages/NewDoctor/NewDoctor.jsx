@@ -44,6 +44,7 @@ const NewDoctor = () => {
     });
     const [image, setImage] = useState('');
     const [browserImage, setBrowserImage] = useState('');
+    const [loading, setLoading] = useState(false);
     const handleOnChange = (e, name) => {
         setDoctorInformtaion({ ...doctorInformation, [name]: e.target.value });
     };
@@ -89,8 +90,7 @@ const NewDoctor = () => {
 
 
     const submitCreateNewDoctor = (data) => {
-        console.log(data);
-        handleCreateNewDoctor(data, image);
+        handleCreateNewDoctor(data, image, setLoading);
     };
 
     return (
@@ -112,10 +112,11 @@ const NewDoctor = () => {
                             <div className="flex items-center gap-6 mt-2">
                                 <label
                                     htmlFor="inputimage"
-                                    className="w-20 h-20 flex items-center justify-center bg-card rounded-full border-2 border-blue-500 cursor-pointer hover:bg-gray-200 transition duration-200"
+                                    className="size-24 rounded-xl flex items-center justify-center bg-card  border-2 border-blue-500 cursor-pointer hover:bg-gray-200 transition duration-200"
                                 >
                                     <FaCamera className="text-blue-500 text-xl" />
                                 </label>
+                
                                 {browserImage && (
                                     <div className="flex items-center gap-3">
                                         <TiDeleteOutline
@@ -129,7 +130,7 @@ const NewDoctor = () => {
                                         <img
                                             src={browserImage}
                                             alt="Doctor Preview"
-                                            className="w-20 h-20 rounded-full object-cover border-2 border-blue-500"
+                                            className="size-24 rounded-xl  object-cover border-2 border-[var(--main-blue)]"
                                         />
                                     </div>
                                 )}
@@ -150,12 +151,12 @@ const NewDoctor = () => {
 
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                             <div className="flex flex-col gap-2">
-                                <Label  icon={<FaUser className="text-[var(--main-blue)]" />} name="Full Name" />
+                                <Label icon={<FaUser className="text-[var(--main-blue)]" />} name="Full Name" />
                                 <Controller
                                     name="fullName"
                                     control={control}
                                     render={({ field }) => (
-                                        <Input type="text" className={`py-6 ${errors.fullName?'border-red-500':''}`} value={field.value} {...field} />
+                                        <Input type="text" className={`py-6 ${errors.fullName ? 'border-red-500' : ''}`} value={field.value} {...field} />
 
                                     )}
 
@@ -172,7 +173,7 @@ const NewDoctor = () => {
                                     name="age"
                                     control={control}
                                     render={({ field }) => (
-                                        <Input type="number" {...field} value={field.value} className={`py-6 ${errors.age?'border-red-500':''}`} />
+                                        <Input type="number" {...field} value={field.value} className={`py-6 ${errors.age ? 'border-red-500' : ''}`} />
 
                                     )}
 
@@ -225,7 +226,7 @@ const NewDoctor = () => {
                                     render={({ field }) => (
                                         <PhoneInput
                                             country="sy"
-                                            inputStyle={{ width: '100%', paddingTop: '24px', paddingBottom: '24px', color: 'black',borderColor:`${errors.phoneNumber?'red':'gray'}` }}
+                                            inputStyle={{ width: '100%', paddingTop: '24px', paddingBottom: '24px', color: 'black', borderColor: `${errors.phoneNumber ? 'red' : 'gray'}` }}
                                             {...field}
 
                                         />
@@ -253,7 +254,7 @@ const NewDoctor = () => {
                                 name="universityGraduate"
                                 control={control}
                                 render={({ field }) => (
-                                    <Input type="text" className={`py-6 ${errors.universityGraduate?'border-red-500':''}`} {...field} value={field.value} />
+                                    <Input type="text" className={`py-6 ${errors.universityGraduate ? 'border-red-500' : ''}`} {...field} value={field.value} />
 
                                 )}
                             />
@@ -269,7 +270,7 @@ const NewDoctor = () => {
                                 name="specialization"
                                 control={control}
                                 render={({ field }) => (
-                                    <Input type="text" className={`py-6 ${errors.specialization?'border-red-500':''}`} {...field} value={field.value} />
+                                    <Input type="text" className={`py-6 ${errors.specialization ? 'border-red-500' : ''}`} {...field} value={field.value} />
 
                                 )}
                             />
@@ -286,7 +287,7 @@ const NewDoctor = () => {
                                 name="experience"
                                 control={control}
                                 render={({ field }) => (
-                                    <Input type="number" className={`py-6 ${errors.experience?'border-red-500':''}`} {...field} value={field.value} />
+                                    <Input type="number" className={`py-6 ${errors.experience ? 'border-red-500' : ''}`} {...field} value={field.value} />
                                 )}
                             />
                             {
@@ -334,7 +335,7 @@ const NewDoctor = () => {
                                 control={control}
                                 render={({ field }) => (
 
-                                    <Input type="text" className={`py-6 ${errors.address?'border-red-500':''}`} {...field} value={field.value} />
+                                    <Input type="text" className={`py-6 ${errors.address ? 'border-red-500' : ''}`} {...field} value={field.value} />
 
                                 )}
                             />
@@ -352,7 +353,7 @@ const NewDoctor = () => {
                                 name="email"
                                 control={control}
                                 render={({ field }) => (
-                                    <Input type="email" className={`py-6 ${errors.email?'border-red-500':''}`} {...field} value={field.value} />
+                                    <Input type="email" className={`py-6 ${errors.email ? 'border-red-500' : ''}`} {...field} value={field.value} />
                                 )}
                             />
 
@@ -370,7 +371,7 @@ const NewDoctor = () => {
                                 name="fee"
                                 control={control}
                                 render={({ field }) => (
-                                    <Input type="number" className={`py-6 ${errors.fee?'border-red-500':''}`} {...field} value={field.value} />
+                                    <Input type="number" className={`py-6 ${errors.fee ? 'border-red-500' : ''}`} {...field} value={field.value} />
                                 )}
                             />
                             {
@@ -386,7 +387,7 @@ const NewDoctor = () => {
                                 name="password"
                                 control={control}
                                 render={({ field }) => (
-                                    <Input type="password" className={`py-6 ${errors.password?'border-red-500':''}`} {...field} value={field.value} />
+                                    <Input type="password" className={`py-6 ${errors.password ? 'border-red-500' : ''}`} {...field} value={field.value} />
                                 )}
                             />
                             {
@@ -399,9 +400,19 @@ const NewDoctor = () => {
 
                 {/* Submit Button */}
                 <div className="pt-6">
-                    <Button type="submit" className="w-full py-6 bg-[var(--main-blue)] text-white hover:bg-slate-500 duration-300 gap-1">
-                        <FaSave className="mr-2" />
-                        Register Doctor
+                    <Button type="submit" disabled={loading} className={`w-full py-6   bg-[var(--main-blue)] hover:bg-slate-700 text-white  duration-300 gap-1`}>
+                        {
+                            loading ?
+                                '••••'
+                                :
+                                <>
+                                    <FaSave className="mr-2" />
+                                    Register Doctor
+                                </>
+                        }
+
+
+
                     </Button>
 
                 </div>

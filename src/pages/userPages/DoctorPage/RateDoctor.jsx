@@ -1,7 +1,9 @@
 import { useState } from 'react';
+import { BsChatHeart } from "react-icons/bs";
 import { FaStarHalf, FaStar, FaUser } from "react-icons/fa6";
 import { FaBackspace, FaHandHoldingMedical } from 'react-icons/fa';
 import { IoMdArrowDropup } from 'react-icons/io';
+import { Button } from '@/components/ui/button'
 import handleCreateNewComment from './handler/handleCreateNewComment';
 import { BsEmojiSmileFill, BsEmojiAngryFill, BsEmojiFrownFill, BsFillEmojiSurpriseFill, BsFillEmojiSunglassesFill } from "react-icons/bs";
 
@@ -72,8 +74,8 @@ const RateDoctor = ({ doctorId }) => {
         <div className="w-full max-w-3xl mx-auto p-6 bg-card rounded-2xl shadow-lg flex flex-col gap-6">
             {isUserRateDoctor ? (
                 <div className="flex flex-col items-center justify-center py-8 gap-4">
-                    <FaHandHoldingMedical className="text-4xl text-yellow-400" />
-                    <span className="text-blue-600 text-xl font-semibold text-center">
+                    <BsChatHeart className="text-4xl text-[var(--main-blue)]"  data-aos="fade-up" data-aos-duration="600" />
+                    <span className="text-blue-600 italic text-xl font-semibold text-center"  data-aos="fade-up" data-aos-duration="600" data-aos-delay="100">
                         Thanks for helping us improve our system!
                     </span>
                 </div>
@@ -99,14 +101,14 @@ const RateDoctor = ({ doctorId }) => {
                             </button>
                             <div className="flex items-center gap-2">
                                 {stars > 0 && [...Array(stars)].map(() => (
-                                    <FaStar key={Math.random()*1000} className="text-lg text-orange-400" />
-                                )) }
-                                {halfStar === 1 && <FaStarHalf className="text-lg text-orange-400" /> }
+                                    <FaStar key={Math.random() * 1000} className="text-lg text-orange-400" />
+                                ))}
+                                {halfStar === 1 && <FaStarHalf className="text-lg text-orange-400" />}
                                 {(stars > 0 || halfStar) ? (
                                     <button onClick={deleteLastStar} className="ml-2">
                                         <FaBackspace className="text-xl cursor-pointer text-red-400 hover:text-red-500 duration-300 transition-all" />
                                     </button>
-                                ):null}
+                                ) : null}
                             </div>
                         </div>
                     </div>
@@ -143,19 +145,18 @@ const RateDoctor = ({ doctorId }) => {
                             onChange={(e) => setOpinion(e.target.value)}
                             placeholder="Share your opinion..."
                             className='inputStyle'
-                            style={{paddingLeft:'15px'}}
-/>
+                            style={{ paddingLeft: '15px' }}
+                        />
                     </div>
 
                     {/* Submit Button */}
-                    <button
+                    <Button
                         disabled={sendingReq}
                         onClick={submitRate}
-                        className={`w-full py-3 px-6 rounded-lg font-semibold text-white transition-all duration-300 shadow-md ${sendingReq ? 'bg-gray-400 cursor-not-allowed' : 'cursor-pointer bg-[var(--main-blue)] hover:bg-blue-700'
-                            }`}
+                        className={`w-full py-6 px-6 rounded-lg font-semibold text-white transition-all duration-300 shadow-md  cursor-pointer bg-[var(--main-blue)] hover:bg-blue-700`}
                     >
-                        {sendingReq ? 'Submitting...' : 'Submit Rating'}
-                    </button>
+                        {sendingReq ? '••••' : 'Submit Rating'}
+                    </Button>
                 </>
             )}
         </div>

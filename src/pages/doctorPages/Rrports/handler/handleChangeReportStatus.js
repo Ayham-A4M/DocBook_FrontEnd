@@ -1,15 +1,13 @@
-import axios from "axios"
 import toast from "react-hot-toast"
-import useGetEnviromentVariable from "../../../../hooks/useGetEnviromentVariable"
-
-const changeStatus = async (url, reportId, status) => {
-    const response = await axios.put(`${url}/api/doctor/archiveReport`, { reportId, status }, { withCredentials: true });
+import axiosInstance from "../../../../helper/axiosInterceptor"
+const changeStatus = async ( reportId, status) => {
+    const response = await axiosInstance.put(`/api/doctor/archiveReport`, { reportId, status });
     return response.data.msg;
 }
 const handleChangeReportStatus = (reportId, status) => {
-    const { url } = useGetEnviromentVariable();
+    
     return new Promise((resolve) => {
-        toast.promise(changeStatus(url, reportId, status), {
+        toast.promise(changeStatus(reportId, status), {
             loading: 'just a moment',
             success: (msg) => { resolve(true); return `${msg}` },
             error: (err) => { resolve(false); return `${err?.response?.data?.msg || 'Faild update status '}` }

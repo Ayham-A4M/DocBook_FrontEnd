@@ -107,7 +107,7 @@ const EditButton = ({ doctorId, setDoctorId }) => {
 
                     <div className="flex justify-center items-center py-2">
                         <div className="size-40 rounded-full border-2 border-popover-foreground overflow-hidden">
-                            <img src={`http://localhost:8000${data?.image}`} className="object-cover w-full h-full" alt="" />
+                            <img src={data?.image} className="object-cover w-full h-full" alt="" />
 
                         </div>
                     </div>

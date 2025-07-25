@@ -1,10 +1,10 @@
-import search from '../../assets/search.svg';
-import DoctorCard from "../../components/DoctorCard";
+import search from '../../../assets/search.svg';
+import DoctorCard from "../../../components/DoctorCard";
 import FilterDoctors from "./FilterDoctors";
-import useGetDoctors from "../../hooks/useGetDoctors";
-import Loader1 from "../../components/Loader1";
-import PaginationButtons from '../../components/PaginationButtons';
-import MainTitle from '../../components/MainTitle';
+import useGetDoctors from "../../../hooks/useGetDoctors";
+import Loader2 from "../../../components/Loader2";
+import PaginationButtons from '../../../components/PaginationButtons';
+import MainTitle from '../../../components/MainTitle';
 const Doctors = () => {
   const { doctors, limit, loading, setSpecialize, setSearchByName, searchByName,page,setPage } = useGetDoctors();
 
@@ -12,7 +12,7 @@ const Doctors = () => {
     <div className="w-full max-w-full mx-auto py-3">
       {/* Filter Section */}
       <div className="mb-6">
-        <MainTitle mainTitle={'Your Health Journey Starts Here'} subTitle={'Connect with trusted doctors and book appointments with confidence'}/>
+        <MainTitle mainTitle={'Health Journey Starts Here'} subTitle={'Connect with trusted doctors and book appointments with confidence'}/>
         
         <FilterDoctors setSpecialize={setSpecialize} setSearchByName={setSearchByName} searchByName={searchByName} />
       </div>
@@ -21,8 +21,7 @@ const Doctors = () => {
       {
         loading ?
           <div className="py-6 flex flex-col justify-center items-center gap-6">
-            <Loader1 />
-            <span className="text-center text-gray-500 text-lg">Loading ...</span>
+            <Loader2 />
           </div>
           :
           (doctors?.length > 0 && doctors) ?

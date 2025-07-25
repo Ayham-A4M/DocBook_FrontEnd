@@ -12,6 +12,7 @@ import EditButton from "./EditButton";
 import DeletePopUp from "../../../components/DeletePopUp";
 import handleDeleteDoctor from "./handler/handleDeleteDoctor";
 const AllDoctors = () => {
+    const [doctors, setDoctors] = useState(null);
     const [showDeletePopUp, setShowDeletePopUp] = useState(false);
     const [page, setPage] = useState(1);
     const [searchName, setSearchName] = useState('');
@@ -19,11 +20,14 @@ const AllDoctors = () => {
     const [searchDebounce] = useDebounce(searchName, 2000);
     const [finalSearch, setFinalSearch] = useState('');
     const [doctorId, setDoctorId] = useState(null);
-    const { data, err, loading } = useAxios(`/api/admin/doctors/?page=${page}&fullName=${finalSearch}&specialization=${spec}`, true);
+    const { data, err, loading } = useAxios(`/api/admin/doctors/?page=${page}&fullName=${finalSearch}&specialization=${spec}`);
     useEffect(() => {
         setFinalSearch(searchDebounce);
         setPage(1);
     }, [searchDebounce])
+    useEffect(() => {
+        setDoctors(data?.doctors);
+    }, [data])
     return (
         <div className="w-full md:p-8 p-1">
             <MainTitle mainTitle={'Medical Staff Dashboard'} subTitle={'Access Doctor Profiles Availability and Key Metrics'} />
@@ -57,22 +61,22 @@ const AllDoctors = () => {
                         <tbody>
                             {
                                 loading ?
-                                    <td colSpan={6} className="py-6">
+                                    <td colSpan={7} className="py-6">
                                         <Loader2 />
                                     </td>
 
 
                                     :
-                                    data?.doctors && data?.doctors?.length > 0
+                                    doctors && doctors?.length > 0
                                         ?
-                                        data?.doctors?.map((doctor) => (
+                                        doctors?.map((doctor) => (
                                             <tr
                                                 key={doctor._id}
                                                 className="border-b px-2 border-gray-100 hover:bg-gray-50 dark:hover:bg-gray-800 transition duration-200"
                                             >
                                                 <td className=" text-gray-900 px-3  font-medium">
                                                     <div className="w-fit aspect-square rounded-full border-gray-500 border-[2px]">
-                                                        <img src={`http://localhost:8000${doctor.image}`} className="rounded-full w-8 aspect-square object-cover " />
+                                                        <img src={doctor.image} className="rounded-full w-8 aspect-square object-cover " />
                                                     </div>
                                                 </td>
                                                 <td className="text-center text-popover-foreground font-medium">{doctor.fullName}</td>
@@ -110,7 +114,7 @@ const AllDoctors = () => {
             {
                 showDeletePopUp &&
 
-                <DeletePopUp setShowDeletePopUp={setShowDeletePopUp} deleteFunction={handleDeleteDoctor} deleteId={doctorId} />
+                <DeletePopUp setShowDeletePopUp={setShowDeletePopUp} deleteFunction={handleDeleteDoctor} deleteId={doctorId} setRecords={setDoctors} />
 
             }
 

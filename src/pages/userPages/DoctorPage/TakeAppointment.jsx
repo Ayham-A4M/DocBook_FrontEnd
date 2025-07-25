@@ -1,13 +1,13 @@
 import { FaCreditCard } from "react-icons/fa6";
 import Title from "./Title";
-import { endOfMonth, format, isEqual, isToday, isWithinInterval, parse } from "date-fns";
+import { endOfMonth, format } from "date-fns";
 import { IoCalendarOutline } from "react-icons/io5";
 import { IoIosClock } from "react-icons/io";
 import { BsFillPatchQuestionFill } from "react-icons/bs";
 import { useState, useMemo } from "react";
-import Loader2 from "../../components/Loader2";
+import Loader2 from "../../../components/Loader2";
 import handleCreateNewAppointment from "./handler/handleCreateNewAppointment";
-import useGetTakedAppointments from "../../hooks/useGetTakedAppointments";
+import useGetTakedAppointments from "../../../hooks/useGetTakedAppointments";
 import { useNavigate } from "react-router-dom";
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
@@ -20,23 +20,22 @@ const TakeAppointment = ({ nextHolidays, workingDays, doctorId, fee }) => {
     const { takedAppointments, sendReq } = useGetTakedAppointments(date, doctorId);
     const times = ['9:00 AM', '9:30 AM', '10:00 AM', '10:30 AM', '11:00 AM', '11:30 AM', '12:00 PM', '12:30 PM', '1:00 PM', '1:30 AM'];
 
-
-
     const isNotHoliday = (date) => {
         return nextHolidays?.every((e) => (
-            !isEqual(e.date,date)
+            e.date != format(date, 'yyyy-MM-dd')
         ))
     };
     const isValidDay = useMemo(() => {
         return (date) => {
-            const isvalid = workingDays?.includes(format(date, 'EEE').toLowerCase()) && isNotHoliday(date) && (isWithinInterval(date, {
-                start: new Date(),
-                end: endOfMonth(new Date())
-            }) || isEqual(date, endOfMonth(new Date())) || isToday(date))
+            const isvalid = workingDays?.includes(format(date, 'EEE').toLowerCase()) && isNotHoliday(date) && (
+                format(date, 'yyyy-MM-dd') >= format(new Date(), 'yyyy-MM-dd') && format(date, 'yyyy-MM-dd') <= format(endOfMonth(new Date()), 'yyyy-MM-dd')
+            )
             return isvalid;
         }
     }
         , [workingDays])
+
+        
     return (
         <div className="w-full bg-card  p-3  rounded-2xl shadow-lg flex flex-col gap-6">
             {/* Days Section */}
@@ -46,7 +45,7 @@ const TakeAppointment = ({ nextHolidays, workingDays, doctorId, fee }) => {
                 <DatePicker
                     className='inputStyle w-full pl-0'
                     selected={date}
-                    onChange={(date) => { setDate(date)}}
+                    onChange={(date) => { setTime(''); setDate(format(date, 'yyyy-MM-dd')) }}
                     filterDate={isValidDay}
                     placeholderText="Select appointment date"
                 />
@@ -59,20 +58,19 @@ const TakeAppointment = ({ nextHolidays, workingDays, doctorId, fee }) => {
                     <Loader2 />
                 </div>
             ) : (
-                <div className="grid grid-cols-3 sm:grid-cols-5 gap-2">
+                <div className="grid grid-cols-3 sm:grid-cols-4 gap-2">
                     {times.map((e, i) => {
-                        const status = takedAppointments?.some((ele) => format(ele.time,'h:mm a')=== e);
+                        const status = takedAppointments?.some((ele) => ele.time === e);
                         return (
                             <button
                                 key={i}
                                 disabled={status}
-                                onClick={(ev) => { ev.preventDefault(); setTime({displayTime:e,isoTime:parse(e,'h:mm a',new Date())}); }}
-                                // onClick={(ev) => { ev.preventDefault(); setTime(e); }}
-                                className={`py-2 px-3  cursor-pointer rounded-lg text-sm font-medium transition-all duration-300 ${time?.displayTime === e
+                                onClick={(ev) => { ev.preventDefault(); setTime(e); }}
+                                className={`py-2 px-3   rounded-lg text-sm font-medium transition-all duration-300 ${time === e
                                     ? 'bg-blue-500 text-white shadow-md'
                                     : status
-                                        ? 'bg-gray-300 text-gray-500 cursor-not-allowed'
-                                        : 'bg-blue-50 text-blue-600 hover:bg-blue-100 hover:shadow-sm'
+                                        ? 'bg-gray-300 cursor-not-allowed text-gray-500 '
+                                        : 'bg-blue-50 text-blue-600 cursor-pointer hover:bg-blue-100 hover:shadow-sm'
                                     }`}
                             >
                                 {e.split(' ').map((part, j) => (

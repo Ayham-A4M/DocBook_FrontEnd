@@ -20,8 +20,8 @@ import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 import FormErrorMessage from '../../components/FormErrorMessage';
 const Login = ({ setShowSignUp }) => {
-
-    const { user, setUser, } = useUser();
+    const [loading, setLoading] = useState(false);
+    const { setUser } = useUser();
     const navigate = useNavigate();
 
 
@@ -32,12 +32,12 @@ const Login = ({ setShowSignUp }) => {
 
     })
 
-    const { control, handleSubmit,formState:{errors} } = useForm({
+    const { control, handleSubmit, formState: { errors } } = useForm({
         resolver: yupResolver(loginSchema),
         defaultValues: {
             isDoctor: false,
-            email:'',
-            password:'',
+            email: '',
+            password: '',
         }
     });
 
@@ -45,8 +45,8 @@ const Login = ({ setShowSignUp }) => {
 
 
     const submitLogin = async (data) => {
-        
-        const role = await handleLoginProcess(data.email, data.password, data.isDoctor, setUser);
+
+        const role = await handleLoginProcess(data.email, data.password, data.isDoctor, setUser,setLoading);
         if (role == "doctor") {
             return navigate('/doctorappointments', { replace: true });
         } else if (role == "admin") {
@@ -67,10 +67,10 @@ const Login = ({ setShowSignUp }) => {
                 <form className="space-y-6" onSubmit={handleSubmit(submitLogin)}>
                     {/* Email Field */}
                     <div className="space-y-2">
-                      
+
                         <Label htmlFor="emailField">Email</Label>
                         <Controller name="email" control={control}
-       
+
                             render={({ field }) => (
                                 <Input id="emailField" type="email" className='py-6' {...field} placeholder="helloworld@gmail.com" />
                             )}
@@ -85,11 +85,11 @@ const Login = ({ setShowSignUp }) => {
                     <div className="space-y-2">
                         <Label htmlFor="passField" >Passowrd</Label>
                         {
-                            errors.password&&
-                            <FormErrorMessage message={errors.password.message}/>
+                            errors.password &&
+                            <FormErrorMessage message={errors.password.message} />
                         }
                         <Controller name="password" control={control}
-                        
+
                             render={({ field }) => (
                                 <Input id="passField" type="password" className='py-6' placeholder="••••••••" {...field} />
                             )}
@@ -115,7 +115,15 @@ const Login = ({ setShowSignUp }) => {
                     </div>
 
                     {/* Submit Button */}
-                    <Button type="submit" className="w-full py-6 bg-[#2c4ca2] hover:bg-[#3457b7] cursor-pointer">Login</Button>
+                    <Button type="submit" disabled={loading} className="w-full py-6 bg-[#2c4ca2] hover:bg-[#3457b7] cursor-pointer">
+                        {
+                            loading ?
+                            '••••'
+                            :
+                                'Login'
+                        }
+
+                    </Button>
                 </form>
             </CardContent>
             <CardFooter>

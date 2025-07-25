@@ -1,19 +1,18 @@
-import { useEffect, useState } from "react"
+import { useEffect, useState, useMemo } from "react"
 import useAxios from "../useAxios";
+import { format } from "date-fns";
 
 const useGetTodayAppointments = () => {
-
-    const date = new Date();
+    const date = format(new Date(), 'yyyy-MM-dd');
     const [appointments, setAppointments] = useState(null);
-    
-    const { data, err, loading } = useAxios(`/api/doctor/doctorAppointments/?date=${date}`, true);
-    useEffect(()=>{
-        if(data){
+    const { data, err, loading } = useAxios(`/api/doctor/doctorAppointments/?date=${date}`);
+    useEffect(() => {
+        if (data) {
             setAppointments(data)
         }
-    },[data])
+    }, [data])
 
-    return { appointments, loading,setAppointments };
+    return { appointments, loading, setAppointments };
 }
 
 export default useGetTodayAppointments
