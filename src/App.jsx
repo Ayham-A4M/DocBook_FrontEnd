@@ -60,7 +60,7 @@ const App = () => {
               {/* User Routes */}
               <Route element={<MainLayout />}>
                 <Route path="/" element={<Home />} />
-                {/* <Route element={<PortectRoute role={'user'} />}> */}
+                <Route element={<PortectRoute role={'user'} />}>
                 <Route path="/about" element={<About />} />
                 <Route path="/contact" element={<ContactUs />} />
                 <Route path="/doctors" element={<Doctors />} />
@@ -68,15 +68,15 @@ const App = () => {
                 <Route path="/myappointments" element={<MyAppointments />} />
                 <Route path="/report" element={<ReportPage />} />
               </Route>
-              {/* </Route> */}
-              {/* <Route element={<PortectRoute role={'user'} />}> */}
+              </Route>
+              <Route element={<PortectRoute role={'user'} />}>
               <Route path="/AIChat" element={<AIChat />} />
-              {/* </Route> */}
+              </Route>
               {/* User Routes */}
 
 
               {/* doctor routes */}
-              {/* <Route element={<PortectRoute role={'doctor'} />}> */}
+              <Route element={<PortectRoute role={'doctor'} />}>
               <Route element={<DoctorLayout />}>
                 <Route path="/doctorappointments" element={<DoctorAppointments />} />
                 <Route path="/reports" element={<Reports />} />
@@ -85,12 +85,12 @@ const App = () => {
                 <Route path="/reportPage" element={<ReportPage />} />
                 <Route path="/upcomingAppointments" element={<UpComingAppointments />} />
               </Route>
-              {/* </Route> */}
+              </Route>
               {/* doctor routes */}
 
               {/* admin routes */}
 
-              {/* <Route element={<PortectRoute role={'admin'} />}> */}
+              <Route element={<PortectRoute role={'admin'} />}>
               <Route element={<DoctorLayout />}>
 
                 <Route path="/statistics" element={<AdminDashboard />} />
@@ -100,7 +100,7 @@ const App = () => {
                 <Route path="/holidays" element={<HolidayPage />} />
               </Route>
 
-              {/* </Route> */}
+              </Route>
 
 
 
