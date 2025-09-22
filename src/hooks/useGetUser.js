@@ -8,7 +8,7 @@ const useGetUser = () => {
         const getUser = async () => {
             try {
                 const response = await axiosInstance.get(`/api/auth/getuser`);
-                if (response.status === 200) {
+                if (response.status <400) {
                     setUser(response.data.user);
                 }
             } catch (err) {
