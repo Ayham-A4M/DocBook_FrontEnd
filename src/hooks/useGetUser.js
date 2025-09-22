@@ -2,8 +2,9 @@ import { useState, useLayoutEffect } from "react"
 import axiosInstance from "../helper/axiosInterceptor";
 const useGetUser = () => {
     const [user, setUser] = useState(null);
-    const [loadingUser, setLoadingUser] = useState(true);
+    const [loadingUser, setLoadingUser] = useState(false);
     useLayoutEffect(() => {
+        setLoadingUser(true);
         const getUser = async () => {
             try {
                 const response = await axiosInstance.get(`/api/auth/getuser`);
