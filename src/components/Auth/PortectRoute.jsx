@@ -5,9 +5,13 @@ import Loader1 from "../Loader1"
 const PortectRoute = ({ role }) => {
   const { user, loading } = useUser();
   if (loading) {
-    return <Loader1 />
+    return (
+      <div className="flex justify-center items-center h-[80vh]">
+        <Loader1 />
+      </div>
+    )
   }
-  if (role==user?.role) {
+  if (role == user?.role) {
     return <Outlet />
   }
   if (user) {
