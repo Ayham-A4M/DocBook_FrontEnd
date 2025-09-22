@@ -6,7 +6,7 @@ const MainLayout = () => {
   return (
     <div className="min-h-screen relative">
       <Nav  />
-      <div className={`px-[15px]  pt-20  md:px-[60px] `}>
+      <div className={`px-[15px] h-screen pt-20  md:px-[60px] `}>
         <Outlet />
       </div>
       <Footer />
