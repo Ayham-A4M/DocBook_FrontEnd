@@ -4,7 +4,7 @@ import Footer from "../components/Footer/Footer"
 const MainLayout = () => {
  
   return (
-    <div >
+    <div className="min-h-screen relative">
       <Nav  />
       <div className={`px-[15px]  pt-20  md:px-[60px] `}>
         <Outlet />
