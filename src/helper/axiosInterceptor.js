@@ -23,7 +23,7 @@ axiosInstance.interceptors.response.use(
                 return new Promise((resolve, reject) => {
                     failedRequests.push({ resolve, reject });
                 }).then(() => {
-                    return api(originalRequest);
+                    return axiosInstance(originalRequest);
                 }).catch(err => {
                     return Promise.reject(err);
                 });
